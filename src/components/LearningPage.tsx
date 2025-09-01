@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
-import { VideoPlayerModal } from './VideoPlayerModal';
-import { useTheme } from '../contexts/ThemeContext';
+import React, { useState } from "react";
+import { ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react";
+import { VideoPlayerModal } from "./VideoPlayerModal";
+import { useTheme } from "../contexts/ThemeContext";
 
 interface LearningCardProps {
   title: string;
@@ -13,14 +13,22 @@ interface LearningCardProps {
   isDark: boolean;
 }
 
-const LearningCard: React.FC<LearningCardProps> = ({ title, subtitle, description, image, tags, onClick, isDark }) => {
+const LearningCard: React.FC<LearningCardProps> = ({
+  title,
+  subtitle,
+  description,
+  image,
+  tags,
+  onClick,
+  isDark,
+}) => {
   return (
-    <div 
+    <div
       onClick={onClick}
       className={`rounded-2xl overflow-hidden border transition-all duration-300 group cursor-pointer ${
-        isDark 
-          ? 'bg-gray-900/50 border-gray-800 hover:border-gray-700' 
-          : 'bg-gray-50/50 border-gray-200 hover:border-gray-300'
+        isDark
+          ? "bg-gray-900/50 border-gray-800 hover:border-gray-700"
+          : "bg-gray-50/50 border-gray-200 hover:border-gray-300"
       }`}
     >
       {/* Image */}
@@ -30,18 +38,22 @@ const LearningCard: React.FC<LearningCardProps> = ({ title, subtitle, descriptio
           alt={title}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-        
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+
         {/* Play Button Overlay */}
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <div className="w-16 h-16 bg-blue-600/90 backdrop-blur-sm rounded-full flex items-center justify-center">
-            <svg className="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M8 5v14l11-7z"/>
+            <svg
+              className="w-6 h-6 text-white ml-1"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path d="M8 5v14l11-7z" />
             </svg>
           </div>
         </div>
       </div>
-      
+
       {/* Content */}
       <div className="p-6">
         {/* Tags */}
@@ -55,21 +67,25 @@ const LearningCard: React.FC<LearningCardProps> = ({ title, subtitle, descriptio
             </span>
           ))}
         </div>
-        
+
         {/* Title */}
-        <h3 className={`text-xl font-bold mb-3 ${
-          isDark ? 'text-white' : 'text-gray-900'
-        }`}>
+        <h3
+          className={`text-xl font-bold mb-3 ${
+            isDark ? "text-white" : "text-gray-900"
+          }`}
+        >
           {title}
         </h3>
-        
+
         {/* Description */}
-        <p className={`text-sm leading-relaxed mb-4 ${
-          isDark ? 'text-gray-400' : 'text-gray-600'
-        }`}>
+        <p
+          className={`text-sm leading-relaxed mb-4 ${
+            isDark ? "text-gray-400" : "text-gray-600"
+          }`}
+        >
           {description}
         </p>
-        
+
         {/* Learn More Button */}
         <button className="text-green-400 hover:text-green-300 font-medium text-sm transition-colors">
           Saiba mais
@@ -81,47 +97,59 @@ const LearningCard: React.FC<LearningCardProps> = ({ title, subtitle, descriptio
 
 const learningContent = [
   {
-    title: 'Chegadas e saídas automáticas com Geofence',
-    subtitle: 'Localização',
-    description: 'Ativa ações automáticas com base na localização do teu smartphone. O 2smart detecta quando entras ou sais de uma área definida - ideal para automatizar rotinas sem mexer no app.',
-    image: 'https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800',
-    tags: ['Localização', 'Automatização']
+    title: "Adicionar um Novo Colaborador",
+    subtitle: "Colaborador",
+    description:
+      "Saiba como criar um novo perfil de colaborador no 2Smart HR, garantindo acesso seguro e personalizado às funcionalidades.",
+    image: "https://i.imgur.com/vFAX1Ow.png",
+    tags: ["Colaborador"],
+    videoUrl: "https://www.youtube.com/watch?v=0iT6u8b8bPE",
   },
   {
-    title: 'Chegadas e saídas automáticas com Geofence',
-    subtitle: 'Localização',
-    description: 'Ativa ações automáticas com base na localização do teu smartphone. O 2smart detecta quando entras ou sais de uma área definida - ideal para automatizar rotinas sem mexer no app.',
-    image: 'https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=800',
-    tags: ['Localização', 'Automatização']
+    title: "Atribuir Planos de Trabalho",
+    subtitle: "Atribuição",
+    description:
+      "Aprenda a definir e atribuir planos de trabalho a cada colaborador, otimizando a organização e o desempenho da equipa.",
+    image: "https://i.imgur.com/43yHLBj.png",
+    tags: ["Planos", "Trabalho"],
+    videoUrl: "https://youtu.be/WnFP4Y2hYoU",
   },
   {
-    title: 'Chegadas e saídas automáticas com Geofence',
-    subtitle: 'Localização',
-    description: 'Ativa ações automáticas com base na localização do teu smartphone. O 2smart detecta quando entras ou sais de uma área definida - ideal para automatizar rotinas sem mexer no app.',
-    image: 'https://images.pexels.com/photos/1181354/pexels-photo-1181354.jpeg?auto=compress&cs=tinysrgb&w=800',
-    tags: ['Localização', 'Automatização']
+    title: "Instalar o 2smart App",
+    subtitle: "Webapp",
+    description:
+      "Siga o guia passo a passo para instalar a WebApp do 2Smart HR no seu dispositivo e aceder de forma rápida e otimizada.",
+    image: "https://i.imgur.com/Y6wWOfL.jpeg",
+    tags: ["WebApp"],
+    videoUrl: "https://youtube.com/shorts/z2M2L5p1BPo",
   },
   {
-    title: 'Controlo de Dispositivos Inteligentes',
-    subtitle: 'Automação',
-    description: 'Aprende a controlar todos os teus dispositivos smart de forma centralizada. Desde luzes a termostatos, tudo numa só aplicação.',
-    image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800',
-    tags: ['Automação', 'Dispositivos']
+    title: "Enviar Colaboradores para Terminais",
+    subtitle: "Terminais",
+    description:
+      "Descubra como associar colaboradores a terminais específicos, garantindo acesso controlado e eficiente aos recursos.",
+    image: "https://i.imgur.com/3Jue5G8.png",
+    tags: ["Terminais", "Colaborador"],
+    videoUrl: "https://youtu.be/jHJ3AJXAs7c",
   },
   {
-    title: 'Configuração de Rotinas Personalizadas',
-    subtitle: 'Personalização',
-    description: 'Cria rotinas personalizadas que se adaptam ao teu estilo de vida. Automatiza tarefas diárias e poupa tempo e energia.',
-    image: 'https://images.pexels.com/photos/1571463/pexels-photo-1571463.jpeg?auto=compress&cs=tinysrgb&w=800',
-    tags: ['Personalização', 'Rotinas']
+    title: "Terminar Contrato de Colaborador",
+    subtitle: "Contrato",
+    description:
+      "Aprenda a encerrar o contrato de um colaborador no 2Smart HR, revogando o acesso e atualizando automaticamente os registos.",
+    image: "https://i.imgur.com/QTlQEtT.png",
+    tags: ["Contrato", "Colaborador"],
+    videoUrl: "https://youtu.be/xRbJDEI-oqM",
   },
   {
-    title: 'Monitorização em Tempo Real',
-    subtitle: 'Monitorização',
-    description: 'Acompanha o estado dos teus dispositivos em tempo real. Recebe notificações e mantém-te sempre informado.',
-    image: 'https://images.pexels.com/photos/1571458/pexels-photo-1571458.jpeg?auto=compress&cs=tinysrgb&w=800',
-    tags: ['Monitorização', 'Tempo Real']
-  }
+    title: "Configurar Horários de Trabalho",
+    subtitle: "Horario",
+    description:
+      "Saiba como definir, ajustar e gerir os horários de trabalho dos colaboradores, assegurando sincronização com o sistema",
+    image: "https://i.imgur.com/uDqZSbe.png",
+    tags: ["Horarios", "Trabalho"],
+    videoUrl: "https://youtu.be/5VkKtHCsOYA",
+  },
 ];
 
 interface LearningPageProps {
@@ -131,9 +159,11 @@ interface LearningPageProps {
 export const LearningPage: React.FC<LearningPageProps> = ({ onBack }) => {
   const { isDark } = useTheme();
   const [currentPage, setCurrentPage] = useState(0);
-  const [selectedVideo, setSelectedVideo] = useState<typeof learningContent[0] | null>(null);
+  const [selectedVideo, setSelectedVideo] = useState<
+    (typeof learningContent)[0] | null
+  >(null);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
-  
+
   const itemsPerPage = 3;
   const totalPages = Math.ceil(learningContent.length / itemsPerPage);
 
@@ -150,7 +180,7 @@ export const LearningPage: React.FC<LearningPageProps> = ({ onBack }) => {
     setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
   };
 
-  const handleCardClick = (item: typeof learningContent[0]) => {
+  const handleCardClick = (item: (typeof learningContent)[0]) => {
     setSelectedVideo(item);
     setIsVideoModalOpen(true);
   };
@@ -166,9 +196,9 @@ export const LearningPage: React.FC<LearningPageProps> = ({ onBack }) => {
       <button
         onClick={onBack}
         className={`flex items-center gap-2 transition-colors mb-8 ${
-          isDark 
-            ? 'text-gray-400 hover:text-white' 
-            : 'text-gray-600 hover:text-gray-900'
+          isDark
+            ? "text-gray-400 hover:text-white"
+            : "text-gray-600 hover:text-gray-900"
         }`}
       >
         <ArrowLeft className="w-4 h-4" />
@@ -177,20 +207,28 @@ export const LearningPage: React.FC<LearningPageProps> = ({ onBack }) => {
 
       {/* Header */}
       <div className="mb-16 max-w-4xl">
-        <h1 className={`text-3xl lg:text-4xl font-normal mb-6 ${
-          isDark ? 'text-white' : 'text-gray-900'
-        }`}>
-          Aprender a usar o 2SMART
+        <h1
+          className={`text-3xl lg:text-4xl font-normal mb-6 ${
+            isDark ? "text-white" : "text-gray-900"
+          }`}
+        >
+          Aprender a usar o 2Smart HR
         </h1>
-        <p className={`text-base leading-relaxed mb-2 ${
-          isDark ? 'text-gray-400' : 'text-gray-600'
-        }`}>
-          Explore vídeos curtos e práticos que mostram como tirar o máximo partido do 2SMART.
+        <p
+          className={`text-base leading-relaxed mb-2 ${
+            isDark ? "text-gray-400" : "text-gray-600"
+          }`}
+        >
+          Explore vídeos curtos e práticos que mostram como tirar o máximo
+          partido do 2Smart HR.
         </p>
-        <p className={`text-base leading-relaxed ${
-          isDark ? 'text-gray-400' : 'text-gray-600'
-        }`}>
-          Aprenda passo a passo a configurar, personalizar e usar todas as funcionalidades — ao seu ritmo e sem complicações.
+        <p
+          className={`text-base leading-relaxed ${
+            isDark ? "text-gray-400" : "text-gray-600"
+          }`}
+        >
+          Aprenda passo a passo a configurar, personalizar e usar todas as
+          funcionalidades — ao seu ritmo e sem complicações.
         </p>
       </div>
 
@@ -215,9 +253,9 @@ export const LearningPage: React.FC<LearningPageProps> = ({ onBack }) => {
         <button
           onClick={prevPage}
           className={`p-2 rounded-lg transition-colors ${
-            isDark 
-              ? 'bg-gray-800 text-gray-400 hover:text-white hover:bg-gray-700' 
-              : 'bg-gray-200 text-gray-600 hover:text-gray-900 hover:bg-gray-300'
+            isDark
+              ? "bg-gray-800 text-gray-400 hover:text-white hover:bg-gray-700"
+              : "bg-gray-200 text-gray-600 hover:text-gray-900 hover:bg-gray-300"
           }`}
           disabled={totalPages <= 1}
         >
@@ -231,9 +269,13 @@ export const LearningPage: React.FC<LearningPageProps> = ({ onBack }) => {
               key={index}
               onClick={() => setCurrentPage(index)}
               className={`w-2 h-2 rounded-full transition-all ${
-                index === currentPage 
-                  ? (isDark ? 'bg-white' : 'bg-gray-900') 
-                  : (isDark ? 'bg-gray-600 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-600')
+                index === currentPage
+                  ? isDark
+                    ? "bg-white"
+                    : "bg-gray-900"
+                  : isDark
+                  ? "bg-gray-600 hover:bg-gray-400"
+                  : "bg-gray-400 hover:bg-gray-600"
               }`}
             />
           ))}
@@ -242,9 +284,9 @@ export const LearningPage: React.FC<LearningPageProps> = ({ onBack }) => {
         <button
           onClick={nextPage}
           className={`p-2 rounded-lg transition-colors ${
-            isDark 
-              ? 'bg-gray-800 text-gray-400 hover:text-white hover:bg-gray-700' 
-              : 'bg-gray-200 text-gray-600 hover:text-gray-900 hover:bg-gray-300'
+            isDark
+              ? "bg-gray-800 text-gray-400 hover:text-white hover:bg-gray-700"
+              : "bg-gray-200 text-gray-600 hover:text-gray-900 hover:bg-gray-300"
           }`}
           disabled={totalPages <= 1}
         >
@@ -256,7 +298,8 @@ export const LearningPage: React.FC<LearningPageProps> = ({ onBack }) => {
       <VideoPlayerModal
         isOpen={isVideoModalOpen}
         onClose={handleCloseVideoModal}
-        videoTitle={selectedVideo?.title || ''}
+        videoTitle={selectedVideo?.title || ""}
+        videoUrl={selectedVideo?.videoUrl}
       />
     </div>
   );

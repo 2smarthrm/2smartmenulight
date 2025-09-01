@@ -1,8 +1,8 @@
 import React from "react";
-import { X, Play, Mail, Phone, CheckCircle, Star } from "lucide-react";
+import { X, Play, Mail, Phone, CheckCircle } from "lucide-react";
 import { useTheme } from "../contexts/ThemeContext";
 
-interface Module {
+export interface Module {
   id: string;
   title: string;
   description: string;
@@ -11,6 +11,14 @@ interface Module {
   features: string[];
   demoImage: string;
   detailedDescription: string;
+  demoVideo?: string;
+  note?: string;
+
+  /** Opcional: força o template de preços */
+  pricingType?: "module" | "report";
+
+  /** Opcional: substitui linhas default por estas */
+  pricingRows?: Array<{ label: string; value: string }>;
 }
 
 interface ModuleModalProps {
@@ -25,23 +33,61 @@ export const ModuleModal: React.FC<ModuleModalProps> = ({
   onClose,
 }) => {
   const { isDark } = useTheme();
+  const [isVideoPlaying, setIsVideoPlaying] = React.useState(false);
 
+  // Bloqueia scroll do body quando modal aberto e reseta vídeo ao fechar/trocar módulo
   React.useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
+      setIsVideoPlaying(false);
     } else {
       document.body.style.overflow = "";
     }
-
     return () => {
       document.body.style.overflow = "";
     };
   }, [isOpen]);
+  // dentro do ModuleModal.tsx (no topo do ficheiro)
+  const toYouTubeEmbed = (url?: string) => {
+    if (!url) return undefined;
+    try {
+      // normaliza
+      const u = new URL(url);
+      // youtu.be/<id>
+      if (u.hostname.includes("youtu.be")) {
+        const id = u.pathname.replace("/", "");
+        return `https://www.youtube.com/embed/${id}`;
+      }
+      // youtube.com/watch?v=<id>
+      if (u.hostname.includes("youtube.com")) {
+        // /watch?v=...  ou /shorts/<id>  ou /embed/<id>
+        if (u.pathname === "/watch") {
+          const id = u.searchParams.get("v");
+          if (id) return `https://www.youtube.com/embed/${id}`;
+        }
+        if (u.pathname.startsWith("/shorts/")) {
+          const id = u.pathname.split("/")[2];
+          if (id) return `https://www.youtube.com/embed/${id}`;
+        }
+        if (u.pathname.startsWith("/embed/")) {
+          return url; // já é embed
+        }
+      }
+      return url; // fallback
+    } catch {
+      return url;
+    }
+  };
+
+  React.useEffect(() => {
+    // sempre que troca de módulo, parar vídeo
+    setIsVideoPlaying(false);
+  }, [module?.id]);
 
   const handleRequestAccess = () => {
-    if (module) {
-      const subject = `Solicitação de Acesso - ${module.title}`;
-      const body = `Olá,
+    if (!module) return;
+    const subject = `Solicitação de Acesso - ${module.title}`;
+    const body = `Olá,
 
 Gostaria de solicitar acesso ao módulo "${module.title}" (${module.price}).
 
@@ -54,15 +100,46 @@ Por favor, enviem-me mais informações sobre:
 Aguardo o vosso contacto.
 
 Cumprimentos,`;
-
-      const mailtoLink = `mailto:helpdesk@2smart.pt?subject=${encodeURIComponent(
-        subject
-      )}&body=${encodeURIComponent(body)}`;
-      window.location.href = mailtoLink;
-    }
+    const mailtoLink = `mailto:andreia.perdigao@2smart.pt?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoLink;
   };
 
   if (!isOpen || !module) return null;
+
+  // monta a src do iframe com autoplay quando for para tocar
+  const baseEmbed = toYouTubeEmbed(module.demoVideo);
+  const iframeSrc =
+    baseEmbed && isVideoPlaying
+      ? `${baseEmbed}?autoplay=1&rel=0&modestbranding=1&playsinline=1`
+      : undefined;
+  // Decide o template de preços (por categoria ou override)
+  const kind: "module" | "report" =
+    module.pricingType ??
+    (/relat[óo]rio/i.test(module.category) ? "report" : "module");
+
+  // Linhas por defeito de cada template
+  const defaultRowsByKind: Record<
+    "module" | "report",
+    Array<{ label: string; value: string }>
+  > = {
+    module: [
+      { label: "Preço Base", value: module.price },
+      { label: "Setup", value: "Gratuito" },
+      { label: "Suporte", value: "De acordo com o SLA Contratado" },
+      { label: "Teste Gratuito", value: "Disponível" },
+    ],
+    report: [
+      { label: "Preço Base", value: module.price },
+      { label: "Setup", value: "Gratuito" },
+      { label: "Implementação", value: "Imediata" },
+      { label: "Teste Gratuito", value: "Disponível" },
+    ],
+  };
+
+  // Se vierem rows personalizadas no module, usamos essas; senão o template
+  const pricingRows = module.pricingRows ?? defaultRowsByKind[kind];
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -74,9 +151,12 @@ Cumprimentos,`;
 
       {/* Modal */}
       <div
-        className={`relative w-full max-w-4xl rounded-2xl overflow-hidden border  ${
+        className={`relative max-w-[90vw] max-h-[90vh] max-w-4xl rounded-2xl overflow-hidden border mt-10 mb-10 ${
           isDark ? "bg-gray-900 border-gray-700" : "bg-white border-gray-300"
         }`}
+        role="dialog"
+        aria-modal="true"
+        aria-label={`Detalhes do módulo ${module.title}`}
       >
         {/* Header */}
         <div
@@ -86,7 +166,7 @@ Cumprimentos,`;
               : "border-gray-200 bg-gray-50/50"
           }`}
         >
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 flex-wrap">
             <h2
               className={`text-2xl font-bold ${
                 isDark ? "text-white" : "text-gray-900"
@@ -94,15 +174,17 @@ Cumprimentos,`;
             >
               {module.title}
             </h2>
+
             <span
               className={`px-3 py-1 text-sm rounded-full border ${
                 isDark
-                  ? "bg-white/10 text-white-400 border-white/40"
-                  : "bg-black/10 rounded-full border border-black/30"
+                  ? "bg-white/10 text-white/80 border-white/30"
+                  : "bg-black/10 text-gray-900 border-black/20"
               }`}
             >
               {module.price}
             </span>
+
             <span
               className={`px-3 py-1 text-sm rounded-full border ${
                 isDark
@@ -112,7 +194,18 @@ Cumprimentos,`;
             >
               {module.category}
             </span>
+
+            {module.note && (
+              <span
+                className={`text-xs leading-snug ml-2 ${
+                  isDark ? "text-white/60" : "text-gray-600"
+                }`}
+              >
+                {module.note}
+              </span>
+            )}
           </div>
+
           <button
             onClick={onClose}
             className={`p-2 rounded-lg transition-colors ${
@@ -120,34 +213,55 @@ Cumprimentos,`;
                 ? "bg-gray-800 text-gray-400 hover:text-white hover:bg-gray-700"
                 : "bg-gray-200 text-gray-600 hover:text-gray-900 hover:bg-gray-300"
             }`}
+            aria-label="Fechar"
           >
             <X size={24} />
           </button>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 p-6">
-          {/* Left Column - Demo */}
-          <div className="space-y-6">
+        <div className="grid lg:grid-cols-2 gap-7 p-6">
+          {/* Left Column - Demo (vídeo ou imagem) */}
+          <div className="space-y-5">
             <div
-              className={`relative aspect-video rounded-xl overflow-hidden ${
+              className={`relative aspect-video rounded-xl overflow-hidden w-full max-w-[95%] ${
                 isDark ? "bg-gray-800" : "bg-gray-200"
               }`}
             >
-              <img
-                src={module.demoImage}
-                alt={`${module.title} demo`}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                <button className="w-16 h-16 bg-blue-600/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-blue-500/90 transition-colors group">
-                  <Play className="w-6 h-6 text-white ml-1" />
-                </button>
-              </div>
-              <div className="absolute top-4 left-4">
-                <span className="px-3 py-1 bg-black/60 backdrop-blur-sm text-white text-sm rounded-full">
-                  Demo Interativo
-                </span>
-              </div>
+              {iframeSrc ? (
+                <iframe
+                  className="w-full h-full"
+                  src={iframeSrc}
+                  title={module.title}
+                  allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+                  allowFullScreen
+                />
+              ) : (
+                <>
+                  <img
+                    src={module.demoImage}
+                    alt={`${module.title} demo`}
+                    className="w-full h-full object-cover"
+                  />
+                  {module.demoVideo ? (
+                    <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+                      <button
+                        onClick={() => setIsVideoPlaying(true)}
+                        className="w-16 h-16 bg-blue-600/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-blue-500/90 transition-colors group"
+                        aria-label="Reproduzir vídeo"
+                      >
+                        <Play className="w-6 h-6 text-white ml-1" />
+                      </button>
+                    </div>
+                  ) : null}
+                  <div className="absolute top-4 left-4">
+                    <span className="px-3 py-1 bg-black/60 backdrop-blur-sm text-white text-sm rounded-full">
+                      {module.demoVideo
+                        ? "Demo Interativa"
+                        : "Pré‑visualização"}
+                    </span>
+                  </div>
+                </>
+              )}
             </div>
 
             {/* Description */}
@@ -160,36 +274,24 @@ Cumprimentos,`;
                 Sobre este Módulo
               </h3>
               <p
-                className={`leading-relaxed mb-4 ${
+                className={`leading-snug mb-4 text-justify ${
                   isDark ? "text-gray-400" : "text-gray-600"
                 }`}
               >
                 {module.detailedDescription}
               </p>
               <p
-                className={`leading-relaxed ${
+                className={`leading-none ${
                   isDark ? "text-gray-400" : "text-gray-600"
                 }`}
               >
                 {module.description}
               </p>
             </div>
-
-            {/* Rating */}
-            {/* <div className="flex items-center gap-2">
-              <div className="flex gap-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                ))}
-              </div>
-              <span className={`text-sm ${
-                isDark ? 'text-gray-400' : 'text-gray-600'
-              }`}>4.9/5 (127 avaliações)</span>
-            </div> */}
           </div>
 
           {/* Right Column - Features & Contact */}
-          <div className="space-y-6">
+          <div className="space-y-5">
             {/* Features */}
             <div>
               <h3
@@ -222,43 +324,36 @@ Cumprimentos,`;
               }`}
             >
               <h3
-                className={`text-lg font-semibold mb-3 ${
+                className={`text-lg font-semibold mb-2 ${
                   isDark ? "text-white" : "text-gray-900"
                 }`}
               >
-                Informações de Preço
+                {kind === "report"
+                  ? "Informações de Preço (Relatório)"
+                  : "Informações de Preço (Módulo)"}
               </h3>
-              <div className="space-y-2">
-                <div className="flex justify-between">
-                  <span className={isDark ? "text-gray-400" : "text-gray-600"}>
-                    Preço Base:
-                  </span>
-                  <span
-                    className={`font-semibold ${
-                      isDark ? "text-white" : "text-gray-900"
-                    }`}
-                  >
-                    {module.price}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className={isDark ? "text-gray-400" : "text-gray-600"}>
-                    Setup:
-                  </span>
-                  <span className="text-blue-600">Gratuito</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className={isDark ? "text-gray-400" : "text-gray-600"}>
-                    Suporte:
-                  </span>
-                  <span className="text-blue-600">24/7 Incluído</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className={isDark ? "text-gray-400" : "text-gray-600"}>
-                    Teste Gratuito:
-                  </span>
-                  <span className="text-blue-600">30 dias</span>
-                </div>
+
+              <div className="space-y-1">
+                {pricingRows.map((row, i) => (
+                  <div key={i} className="flex justify-between">
+                    <span
+                      className={isDark ? "text-gray-400" : "text-gray-600"}
+                    >
+                      {row.label}:
+                    </span>
+                    <span
+                      className={
+                        i === 0
+                          ? `font-semibold ${
+                              isDark ? "text-white" : "text-gray-900"
+                            }`
+                          : "text-blue-600"
+                      }
+                    >
+                      {row.value}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -269,7 +364,7 @@ Cumprimentos,`;
                 className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors"
               >
                 <Mail className="w-5 h-5" />
-                Solicitar Acesso por Email
+                Quero ser contactado pela Equipa 2Smart HR
               </button>
 
               <button
@@ -297,11 +392,7 @@ Cumprimentos,`;
                   24 horas
                 </span>
               </p>
-              <p
-                className={`text-xs mt-1 ${
-                  isDark ? "text-gray-500" : "text-gray-500"
-                }`}
-              >
+              <p className={`text-xs mt-1 text-gray-500`}>
                 Demonstração personalizada disponível
               </p>
             </div>
@@ -322,17 +413,11 @@ Cumprimentos,`;
                 isDark ? "text-gray-400" : "text-gray-600"
               }`}
             >
-              <p>
-                Implementação profissional • Suporte dedicado • Atualizações
-                incluídas
-              </p>
+              Implementação profissional • Suporte dedicado • Atualizações
+              incluídas
             </div>
-            <div
-              className={`text-sm ${
-                isDark ? "text-gray-500" : "text-gray-500"
-              }`}
-            >
-              Exportech Portugal © 2024
+            <div className="text-sm text-gray-500">
+              Exportech Portugal © 2025
             </div>
           </div>
         </div>

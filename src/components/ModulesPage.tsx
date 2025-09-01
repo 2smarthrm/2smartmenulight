@@ -1,7 +1,21 @@
-import React, { useState } from 'react';
-import { Stethoscope, Settings, Users, Play, TrendingUp, BarChart3 } from 'lucide-react';
-import { ModuleModal } from './ModuleModal';
-import { useTheme } from '../contexts/ThemeContext';
+import React, { useState } from "react";
+import {
+  CalendarCheck,
+  CalendarRange,
+  Users,
+  Clock,
+  FileClock,
+  BarChart3,
+  Fingerprint,
+  Filter,
+  MapPin,
+  ScanLine,
+  List,
+  Radar,
+  Workflow,
+} from "lucide-react";
+import { ModuleModal } from "./ModuleModal";
+import { useTheme } from "../contexts/ThemeContext";
 
 interface Module {
   id: string;
@@ -12,111 +26,252 @@ interface Module {
   category: string;
   features: string[];
   demoImage: string;
+  demoVideo?: string;
   detailedDescription: string;
+  note?: string;
 }
 
 const modules: Module[] = [
   {
-    id: 'medicina',
-    title: 'Medicina',
-    description: 'Sistema completo de gestão médica com prontuários eletrônicos e agendamento.',
-    price: '€19/mês',
-    icon: Stethoscope,
-    category: 'Saúde',
-    features: [
-      'Prontuários eletrônicos',
-      'Agendamento de consultas',
-      'Histórico médico completo',
-      'Receitas digitais',
-      'Relatórios médicos'
-    ],
-    demoImage: 'https://images.pexels.com/photos/4386466/pexels-photo-4386466.jpeg?auto=compress&cs=tinysrgb&w=800',
-    detailedDescription: 'O módulo de Medicina oferece uma solução completa para gestão de clínicas e consultórios médicos. Com interface intuitiva e recursos avançados, permite o controlo total dos processos médicos.'
-  },
-  {
-    id: 'onboarding',
-    title: 'Onboarding',
-    description: 'Processo automatizado de integração de novos colaboradores.',
-    price: '€149/mês',
-    icon: Settings,
-    category: 'RH',
-    features: [
-      'Fluxos de integração personalizados',
-      'Documentação automática',
-      'Acompanhamento de progresso',
-      'Notificações automáticas',
-      'Dashboard de métricas'
-    ],
-    demoImage: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800',
-    detailedDescription: 'Simplifique o processo de integração de novos colaboradores com fluxos automatizados e acompanhamento em tempo real.'
-  },
-  {
-    id: 'formacao',
-    title: 'Formação',
-    description: 'Plataforma de e-learning com cursos e certificações.',
-    price: '€199/mês',
-    icon: Users,
-    category: 'Educação',
-    features: [
-      'Criação de cursos online',
-      'Sistema de avaliações',
-      'Certificados automáticos',
-      'Relatórios de progresso',
-      'Gamificação'
-    ],
-    demoImage: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800',
-    detailedDescription: 'Desenvolva e gerencie programas de formação completos com nossa plataforma de e-learning avançada.'
-  },
-  {
-    id: 'streaming',
-    title: 'Streaming & Media',
-    description: 'Solução completa para transmissões ao vivo e gestão de conteúdo.',
-    price: '€399/mês',
-    icon: Play,
-    category: 'Media',
-    features: [
-      'Transmissões ao vivo HD',
-      'Gestão de conteúdo',
-      'Analytics avançados',
-      'Multi-plataforma',
-      'CDN global'
-    ],
-    demoImage: 'https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&cs=tinysrgb&w=800',
-    detailedDescription: 'Plataforma profissional para streaming e gestão de conteúdo multimedia com qualidade broadcast.'
-  },
-  {
-    id: 'gestao-activos',
-    title: 'Gestão de Ativos Empresariais',
-    description: 'Controlo completo de ativos e inventário empresarial.',
-    price: '€249/mês',
-    icon: TrendingUp,
-    category: 'Gestão',
-    features: [
-      'Inventário em tempo real',
-      'Rastreamento de ativos',
-      'Manutenção preventiva',
-      'Relatórios financeiros',
-      'Códigos QR/RFID'
-    ],
-    demoImage: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800',
-    detailedDescription: 'Gerencie todos os ativos da sua empresa com controlo total sobre localização, estado e valor.'
-  },
-  {
-    id: 'analytics',
-    title: 'Analytics Avançado',
-    description: 'Dashboard inteligente com análises preditivas e BI.',
-    price: '€349/mês',
+    id: "assiduidades_subsidios",
+    title: "Mapa Resumo de Assiduidade e Subsídios",
+    description:
+      "Veja, num só mapa, todas as horas, faltas, férias e subsídios dos seus colaboradores.",
+    price: "8€/mês",
     icon: BarChart3,
-    category: 'Analytics',
+    category: "Relatórios",
     features: [
-      'Dashboards personalizados',
-      'Análise preditiva',
-      'Machine Learning',
-      'Relatórios automáticos',
-      'Integração de dados'
+      "Totais de horas previstas, trabalhadas e faltas",
+      "Faltas classificadas e não classificadas",
+      "Horas extra e Banco de Horas",
+      "Dias de férias e subsídios",
     ],
-    demoImage: 'https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=800',
-    detailedDescription: 'Transforme dados em insights acionáveis com nossa plataforma de analytics powered by AI.'
+    demoImage: "https://i.imgur.com/PchiS0S.png",
+    demoVideo: "https://youtu.be/bQD-qSXCYxY",
+    detailedDescription:
+      "O Mapa Resumo de Assiduidade e Subsídios mostra, por colaborador e para o período selecionado, o total de horas previstas e trabalhadas, faltas (classificadas e não classificadas), horas extra, saldo de Banco de Horas (quando aplicável), dias de férias e tempos a pagar de subsídios. Pode ser gerado com ou sem segmentação por estrutura.",
+  },
+  {
+    id: "empresa_externa",
+    title: "Mapa de Resumo de Assiduidade de Empresas Externas",
+    description:
+      "Resumo de assiduidade dedicado a colaboradores de empresas externas.",
+    price: "8€/mês",
+    icon: Users,
+    category: "Relatórios",
+    features: [
+      "Gestão de empresas e colaboradores externos",
+      "Alocação a empresas do grupo",
+      "Relatório de assiduidade para externos",
+      "Horas, faltas e desempenho",
+    ],
+    demoImage: "https://i.imgur.com/OEP3gH0.png",
+    demoVideo: "https://www.youtube.com/watch?v=iLlEDHfi7ZM",
+    detailedDescription:
+      "Permite gerir e monitorizar a assiduidade de empresas externas, como empresas de trabalho temporário, possibilitando alocar colaboradores externos às empresas do grupo. Este relatório apresenta um mapa semelhante ao Mapa Resumo de Assiduidade, mas dedicado exclusivamente a estes colaboradores, garantindo controlo e análise detalhada do seu desempenho.",
+  },
+  {
+    id: "assiduidade",
+    title: "Mapa Resumo de Assiduidade",
+    description: "Resumo de assiduidade sem horas noturnas.",
+    price: "8€/mês",
+    icon: CalendarCheck,
+    category: "Relatórios",
+    features: [
+      "Resumo de assiduidade por colaborador",
+      "Exclusão de horas noturnas",
+      "Visualização de horas previstas e efetivas",
+      "Identificação de faltas",
+    ],
+    demoImage: "https://i.imgur.com/R3xwBSO.png",
+    demoVideo: "https://www.youtube.com/watch?v=F1cdIkY20dw",
+    detailedDescription:
+      "Relatório que apresenta um resumo da assiduidade por colaborador para o período selecionado, tal como o Mapa Resumo de Assiduidade, mas excluindo a informação relativa ao tempo de horas noturnas.",
+  },
+  {
+    id: "Diarias",
+    title: "Marcações Diárias",
+    description:
+      "Visualize as marcações diárias sem contabilizar horas noturnas.",
+    price: "8€/mês",
+    icon: CalendarRange,
+    category: "Relatórios",
+    features: [
+      "Registo diário de marcações por colaborador",
+      "Visualização simplificada sem horas noturnas",
+      "Apresentação clara e objetiva",
+      "Exportação em formato de relatório",
+    ],
+    demoImage: "https://i.imgur.com/t9DG1j8.png",
+    demoVideo: "https://youtu.be/gZpa1DS6s3A",
+    detailedDescription:
+      "Relatório que apresenta as marcações diárias dos colaboradores, semelhante ao Mapa de Marcações Diárias tradicional, mas sem a indicação do tempo de horas noturnas.",
+  },
+  {
+    id: "tempo-trabalho",
+    title: "Registo de Tempos de Trabalho",
+    description:
+      "Consulte os registos de tempos de trabalho sem contabilizar horas noturnas.",
+    price: "8€/mês",
+    icon: Clock,
+    category: "Relatórios",
+    features: [
+      "Registo detalhado de tempos de trabalho por colaborador",
+      "Visualização simplificada sem horas noturnas",
+      "Apresentação clara e estruturada",
+      "Possibilidade de exportação do relatório",
+    ],
+    demoImage: "https://i.imgur.com/Bh64ykm.png",
+    demoVideo: "https://youtu.be/2d25bmxjZ7M",
+    detailedDescription:
+      "Relatório que apresenta o registo dos tempos de trabalho dos colaboradores, semelhante ao Mapa de Registos de Tempos de Trabalho tradicional, mas sem a indicação do tempo de horas noturnas.",
+  },
+  {
+    id: "faltas",
+    title: "Mapa de Faltas - Filtro",
+    description: "Filtros avançados no Mapa de Faltas.",
+    price: "8€/mês",
+    icon: Filter,
+    category: "Relatórios",
+    features: [
+      "Filtragem por estado da falta",
+      "Filtragem por tipo de classificação",
+      "Visualização segmentada das ausências",
+      "Facilita a análise detalhada",
+    ],
+    demoImage: "https://i.imgur.com/YB9VYSS.png",
+    demoVideo: "https://youtu.be/NMPP8TSqi8w",
+    detailedDescription:
+      "Relatório de faltas que permite aplicar filtros avançados por estado e tipo de classificação, facilitando a análise e segmentação da informação.",
+  },
+  {
+    id: "registo_tempo",
+    title: "Registo de Tempos de Trabalho",
+    description:
+      "Registos de tempos de trabalho sem horas extra “a não considerar”.",
+    price: "8€/mês",
+    icon: FileClock,
+    category: "Relatórios",
+    features: [
+      "Registo detalhado de tempos de trabalho por colaborador",
+      "Informação precisa e ajustada à política da empresa",
+      "Visualização clara e objetiva",
+      "Exportação do relatório para diferentes formatos",
+    ],
+    demoImage: "https://i.imgur.com/Bh64ykm.png",
+    demoVideo: "https://youtu.be/2d25bmxjZ7M",
+    detailedDescription:
+      "Relatório que apresenta o registo dos tempos de trabalho dos colaboradores, semelhante ao Mapa de Registos de Tempos de Trabalho, mas excluindo as horas extra classificadas como “a não considerar” na contabilização.",
+  },
+  {
+    id: "registo_tempo_maps",
+    title: "Registo de Tempos de Trabalho - Maps",
+    description: "Registos de trabalho com localização via Geofencing.",
+    price: "8€/mês",
+    icon: MapPin,
+    category: "Relatórios",
+    features: [
+      "Registo detalhado das horas trabalhadas",
+      "Indicação do local exato das marcações",
+      "Integração com a funcionalidade de Geofencing",
+    ],
+    demoImage: "https://i.imgur.com/RIoR4Sq.png",
+    demoVideo: "https://youtu.be/_wEuey2PjmA",
+    detailedDescription:
+      "Relatório semelhante ao Mapa de Registos de Tempos de Trabalho, mas com indicação do local exato onde cada registo foi efetuado, através de dados de geolocalização. Disponível para clientes que utilizam a funcionalidade de Geofencing.",
+  },
+  {
+    id: "picagens_vm",
+    title: "Mapa de Picagens por Dispositivo - VerifyMode",
+    description: "Consulta de picagens por dispositivo com detalhe do método.",
+    price: "8€/mês",
+    icon: Fingerprint,
+    category: "Relatórios",
+    features: [
+      "Listagem de picagens por dispositivo",
+      "Indicação do método de registo (VerifyMode)",
+      "Remoção opcional do cabeçalho do relatório",
+    ],
+    demoImage: "https://i.imgur.com/f97vPsV.png",
+    demoVideo: "https://youtu.be/h_8jWnJjwO0",
+    detailedDescription:
+      "Relatório que apresenta todas as picagens realizadas em cada dispositivo, indicando o método utilizado (VerifyMode). Permite remover o cabeçalho para exportação simplificada para Excel, obtendo uma lista corrida de dados pronta para análise.",
+  },
+  {
+    id: "registo_tempo_trabalho_vm",
+    title: "Registo de Tempos de Trabalho - VerifyMode",
+    description: "Registos de trabalho com detalhe do método usado na picagem.",
+    price: "8€/mês",
+    icon: ScanLine,
+    category: "Relatórios",
+    features: [
+      "Registo detalhado dos tempos de trabalho",
+      "Identificação do método de picagem (VerifyMode)",
+      "Associação a cada colaborador",
+      "Maior controlo e rastreabilidade",
+    ],
+    demoImage: "https://i.imgur.com/Bh64ykm.png",
+    demoVideo: "https://youtu.be/2d25bmxjZ7M",
+    detailedDescription:
+      "Registos de trabalho em lista, prontos para exportação e análise.",
+  },
+  {
+    id: "listagem_registo_tempo_trabalho_vm",
+    title: "Listagem de Registo de Tempos de Trabalho - VerifyMode",
+    description: "Registos de trabalho com detalhe do método usado na picagem.",
+    price: "8€/mês",
+    icon: List,
+    category: "Relatórios",
+    features: [
+      "Visualização em formato de lista",
+      "Remoção opcional do cabeçalho",
+      "Exportação direta para Excel",
+      "Dados prontos para tratamento e filtragem",
+    ],
+    demoImage: "https://i.imgur.com/l4c8spo.png",
+
+    demoVideo: "https://youtu.be/txNJELklSuc",
+    detailedDescription:
+      "Relatório similar ao Mapa de Registos de Tempos de Trabalho, apresentado em formato de listagem em vez de estar agrupado por colaborador. Permite remover o cabeçalho para exportação direta para Excel, facilitando o tratamento e análise de dados.",
+  },
+  {
+    id: "Geo",
+    title: "Geolocalização & Geofencing",
+    description: "Veja, a movimentação, presença e cobertura das equipas.",
+    price: "1€/mês por Colaborador",
+    icon: Radar,
+    category: "Módulos",
+    features: [
+      "Localização em tempo real",
+      "Definição de zonas geográficas personalizadas",
+      "Execução de ações ao entrar ou sair de áreas definidas",
+      "Registo e histórico de deslocações",
+    ],
+    demoImage: "https://i.imgur.com/zsTqEa7.jpeg",
+    demoVideo: "https://youtu.be/e5N4s3dj0AM",
+    detailedDescription:
+      "Permite monitorizar, a localização de colaboradores e ativos, definindo áreas geográficas específicas para controlo e automatização de processos. Esta funcionalidade possibilita a execução automática de ações sempre que um utilizador entra ou sai de uma zona pré-configurada, garantindo uma gestão mais eficiente das equipas no terreno.",
+    note: "O valor apresentado aplica-se apenas aos colaboradores que utilizam esta funcionalidade.",
+  },
+  {
+    id: "erp",
+    title: "Integração com ERP",
+    description:
+      "Este módulo melhora a produtividade e reforça o controlo sobre os processos internos da sua empresa.",
+    price: "0,65€/mês por Colaborador",
+    icon: Workflow,
+    category: "Módulos",
+    features: [
+      "Ligação direta a sistemas ERP existentes",
+      "Sincronização automática de dados",
+      "Atualização em tempo real de informações",
+      "Automatização de tarefas administrativas e financeiras",
+    ],
+    demoImage: "https://i.imgur.com/cvHyef1.png",
+    demoVideo: "https://youtu.be/uWzivIkfFzo",
+    detailedDescription:
+      "O Módulo de Integração com ERP conecta o 2Smart ao sistema ERP da sua organização, garantindo que dados relativos a colaboradores, horários, registos e relatórios são atualizados de forma automática e contínua. Esta integração elimina tarefas repetitivas, reduz erros humanos e assegura uma gestão mais ágil e precisa.",
+    note: "O valor apresentado aplica-se apenas aos colaboradores que utilizam esta funcionalidade.",
   },
 ];
 
@@ -124,6 +279,11 @@ export const ModulesPage: React.FC = () => {
   const { isDark } = useTheme();
   const [selectedModule, setSelectedModule] = useState<Module | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Filtro de categoria
+  const [categoryFilter, setCategoryFilter] = useState<
+    "Todos" | "Módulos" | "Relatórios"
+  >("Todos");
 
   const handleModuleClick = (module: Module) => {
     setSelectedModule(module);
@@ -135,97 +295,164 @@ export const ModulesPage: React.FC = () => {
     setTimeout(() => setSelectedModule(null), 300);
   };
 
+  // Agrupar módulos por categoria
+  const groupedModules = modules.reduce((acc, module) => {
+    if (!acc[module.category]) {
+      acc[module.category] = [];
+    }
+    acc[module.category].push(module);
+    return acc;
+  }, {} as Record<string, Module[]>);
+
+  // Filtrar categorias a renderizar
+  const categoriesToRender = Object.keys(groupedModules)
+    .sort((a, b) => a.localeCompare(b))
+    .filter((cat) =>
+      categoryFilter === "Todos" ? true : cat === categoryFilter
+    );
+
   return (
     <div className="px-8 lg:px-16 py-8">
       {/* Header */}
       <div className="text-center mb-16 max-w-4xl mx-auto">
-        <h1 className={`text-3xl lg:text-4xl font-normal mb-6 ${
-          isDark ? 'text-white' : 'text-gray-900'
-        }`}>
+        <h1
+          className={`text-3xl lg:text-4xl font-normal mb-6 ${
+            isDark ? "text-white" : "text-gray-900"
+          }`}
+        >
           Módulos e Relatórios
         </h1>
-        <p className={`text-base leading-relaxed ${
-          isDark ? 'text-gray-400' : 'text-gray-600'
-        }`}>
-          Escolha os módulos que melhor se adequam às necessidades da sua empresa. Cada módulo é desenvolvido com tecnologia de ponta e pode ser personalizado.
+        <p
+          className={`text-base leading-relaxed ${
+            isDark ? "text-gray-400" : "text-gray-600"
+          }`}
+        >
+          A Plataforma 2Smart HR dispõe de vários módulos opcionais que podem
+          ser contratados para integrar novas funcionalidades assim como
+          Relatórios que lhe permitem efetuar análises mais segmentadas e
+          abrangendo informações que não constam da versão base do 2Smart HR.
         </p>
       </div>
 
-      {/* Recursos Humanos Section */}
-      <div className="mb-12">
-        <h2 className={`text-xl font-semibold mb-8 text-center ${
-          isDark ? 'text-white' : 'text-gray-900'
-        }`}>
-          Recursos Humanos & Gestão
-        </h2>
-        
-        <div className="space-y-4 max-w-6xl mx-auto">
-          {modules.map((module) => {
-            const IconComponent = module.icon;
-            return (
-              <div
-                key={module.id}
-                className={`flex items-center justify-between p-6 border rounded-xl transition-all cursor-pointer group ${
-                  isDark 
-                    ? 'bg-gray-900/50 border-gray-800 hover:bg-gray-900/70 hover:border-gray-700' 
-                    : 'bg-gray-50/50 border-gray-200 hover:bg-gray-100/70 hover:border-gray-300'
+      {/* Botões de filtro */}
+      <div className="mb-8 flex items-center justify-center">
+        <div
+          className={`inline-flex rounded-xl overflow-hidden ${
+            isDark
+              ? "bg-gray-900/50 border border-gray-800"
+              : "bg-gray-100 border border-gray-200"
+          }`}
+        >
+          {(["Todos", "Módulos", "Relatórios"] as const).map((c) => (
+            <button
+              key={c}
+              onClick={() => setCategoryFilter(c)}
+              className={`px-4 sm:px-6 py-2 text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500
+                ${
+                  categoryFilter === c
+                    ? isDark
+                      ? "bg-white/10 text-white border border-white/20"
+                      : "bg-white text-gray-900 border border-gray-300"
+                    : isDark
+                    ? "text-gray-300 hover:text-white"
+                    : "text-gray-700 hover:text-gray-900"
                 }`}
-                onClick={() => handleModuleClick(module)}
-              >
-                <div className="flex items-center gap-6">
-                  <div className={`w-12 h-12 rounded-lg flex items-center justify-center transition-colors ${
-                    isDark 
-                      ? 'bg-gray-800 group-hover:bg-gray-700' 
-                      : 'bg-gray-200 group-hover:bg-gray-300'
-                  }`}>
-                    <IconComponent className={`w-6 h-6 transition-colors ${
-                      isDark 
-                        ? 'text-gray-400 group-hover:text-white' 
-                        : 'text-gray-600 group-hover:text-gray-900'
-                    }`} />
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-4 mb-2">
-                      <h3 className={`text-lg font-semibold ${
-                        isDark ? 'text-white' : 'text-gray-900'
-                      }`}>
-                        {module.title}
-                      </h3>
-                      <span className={`px-3 py-1 text-sm rounded-full border ${
-                      isDark ? 'bg-white/10 text-white-400 border-white/40' : 'bg-black/10 rounded-full border border-black/30'}`}>
-                        {module.price}
-                      </span>
-                    </div>
-                    <p className={`text-sm ${
-                      isDark ? 'text-gray-400' : 'text-gray-600'
-                    }`}>
-                      {module.description}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <span className={`px-3 py-1 text-xs rounded-full border ${
-                    isDark ? 'bg-blue-600/20 text-blue-400 border-blue-600/30' : 'bg-blue-600/20 text-blue-600 border-blue-600/50'}`}>
-                    {module.category}
-                  </span>
-                  <button className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
-                    Ver Detalhes
-                  </button>
-                </div>
-              </div>
-            );
-          })}
+              aria-pressed={categoryFilter === c}
+            >
+              {c}
+            </button>
+          ))}
         </div>
       </div>
 
-      {/* Footer */}
-      <div className="text-center mt-16">
-        <p className={`text-sm ${
-          isDark ? 'text-gray-500' : 'text-gray-400'
-        }`}>
-          by Exportech Portugal 2024 v.1.0.0 | Termos De Licenciamento
-        </p>
-      </div>
+      {/* Loop por categoria */}
+      {categoriesToRender.map((category) => (
+        <div key={category} className="mb-12">
+          <h2
+            className={`text-2xl font-semibold mb-6 text-center ${
+              isDark ? "text-white" : "text-gray-900"
+            }`}
+          >
+            {category}
+          </h2>
+
+          <div className="space-y-4 max-w-6xl mx-auto">
+            {groupedModules[category].map((module) => {
+              const IconComponent = module.icon;
+              return (
+                <div
+                  key={module.id}
+                  className={`flex items-center justify-between p-6 border rounded-xl transition-all cursor-pointer group ${
+                    isDark
+                      ? "bg-gray-900/50 border-gray-800 hover:bg-gray-900/70 hover:border-gray-700"
+                      : "bg-gray-50/50 border-gray-200 hover:bg-gray-100/70 hover:border-gray-300"
+                  }`}
+                  onClick={() => handleModuleClick(module)}
+                >
+                  <div className="flex items-center gap-6">
+                    <div
+                      className={`w-12 h-12 rounded-lg flex items-center justify-center transition-colors ${
+                        isDark
+                          ? "bg-gray-800 group-hover:bg-gray-700"
+                          : "bg-gray-200 group-hover:bg-gray-300"
+                      }`}
+                    >
+                      <IconComponent
+                        className={`w-6 h-6 transition-colors ${
+                          isDark
+                            ? "text-gray-400 group-hover:text-white"
+                            : "text-gray-600 group-hover:text-gray-900"
+                        }`}
+                      />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-4 mb-2">
+                        <h3
+                          className={`text-lg font-semibold ${
+                            isDark ? "text-white" : "text-gray-900"
+                          }`}
+                        >
+                          {module.title}
+                        </h3>
+                        <span
+                          className={`px-3 py-1 text-sm rounded-full border ${
+                            isDark
+                              ? "bg-white/10 text-white-400 border-white/40"
+                              : "bg-black/10 border border-black/30"
+                          }`}
+                        >
+                          {module.price}
+                        </span>
+                      </div>
+                      <p
+                        className={`text-sm ${
+                          isDark ? "text-gray-400" : "text-gray-600"
+                        }`}
+                      >
+                        {module.description}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <span
+                      className={`px-3 py-1 text-xs rounded-full border ${
+                        isDark
+                          ? "bg-blue-600/20 text-blue-400 border-blue-600/30"
+                          : "bg-blue-600/20 text-blue-600 border-blue-600/50"
+                      }`}
+                    >
+                      {module.category}
+                    </span>
+                    <button className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
+                      Ver Detalhes
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      ))}
 
       {/* Module Modal */}
       <ModuleModal

@@ -9,6 +9,11 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
       },
+      fontFamily: {
+        poppins: ['Poppins', 'sans-serif'],
+        poetsen: ['"Poetsen One"', 'cursive'],
+        staat: ['Staatliches', 'cursive'],
+      },
     },
   },
   plugins: [],
