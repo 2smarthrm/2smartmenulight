@@ -86,10 +86,22 @@ export const ModuleModal: React.FC<ModuleModalProps> = ({
 
   const handleRequestAccess = () => {
     if (!module) return;
+
+    // buscar os parâmetros do link
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get("name") || "N/D";
+    const nif = params.get("nif") || "N/D";
+    const clientId = params.get("id") || "N/D";
+
     const subject = `Solicitação de Acesso - ${module.title}`;
     const body = `Olá,
 
 Gostaria de solicitar acesso ao módulo "${module.title}" (${module.price}).
+
+Informações do Cliente:
+- Nome: ${name}
+- NIF: ${nif}
+- ID: ${clientId}
 
 Por favor, enviem-me mais informações sobre:
 - Processo de implementação
@@ -100,9 +112,11 @@ Por favor, enviem-me mais informações sobre:
 Aguardo o vosso contacto.
 
 Cumprimentos,`;
+
     const mailtoLink = `mailto:andreia.perdigao@2smart.pt?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(body)}`;
+
     window.location.href = mailtoLink;
   };
 
