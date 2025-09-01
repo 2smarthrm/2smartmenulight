@@ -1,5 +1,5 @@
 // src/contexts/ThemeContext.tsx
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 type ThemeContextType = {
   isDark: boolean;
@@ -10,19 +10,20 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const useTheme = () => {
   const ctx = useContext(ThemeContext);
-  if (!ctx) throw new Error('useTheme must be used within a ThemeProvider');
+  if (!ctx) throw new Error("useTheme must be used within a ThemeProvider");
   return ctx;
 };
 
-export const ThemeProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
-  // Força dark SEMPRE
-  const [isDark] = useState<boolean>(true);
+export const ThemeProvider: React.FC<React.PropsWithChildren> = ({
+  children,
+}) => {
+  // Força light SEMPRE
+  const [isDark] = useState<boolean>(false);
 
   useEffect(() => {
     const root = document.documentElement;
-    root.classList.add('dark');
-    root.classList.remove('light');
-    // opcional: não persistimos nada em localStorage
+    root.classList.add("light");
+    root.classList.remove("dark");
   }, []);
 
   const toggleTheme = () => {}; // desativado
