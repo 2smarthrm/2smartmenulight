@@ -36,7 +36,7 @@ const modules: Module[] = [
     id: "assiduidades_subsidios",
     title: "Mapa Resumo de Assiduidade e Subsídios",
     description:
-      "Veja, num só mapa, todas as horas, faltas, férias e subsídios dos seus colaboradores.",
+      "Veja, num só mapa, todas as horas, faltas, férias e subsídios dos seus colaboradores, para o período de tempo que definir.",
     price: "8€/mês",
     icon: BarChart3,
     category: "Relatórios",
@@ -49,7 +49,7 @@ const modules: Module[] = [
     demoImage: "https://i.imgur.com/PchiS0S.png",
     demoVideo: "https://youtu.be/bQD-qSXCYxY",
     detailedDescription:
-      "O Mapa Resumo de Assiduidade e Subsídios mostra, por colaborador e para o período selecionado, o total de horas previstas e trabalhadas, faltas (classificadas e não classificadas), horas extra, saldo de Banco de Horas (quando aplicável), dias de férias e tempos a pagar de subsídios. Pode ser gerado com ou sem segmentação por estrutura.",
+      "O Mapa Resumo de Assiduidade e Subsídios apresenta, por colaborador e para o período selecionado, o total de horas previstas e trabalhadas, faltas (classificadas e não classificadas), horas extra (classificadas e não classificadas), saldo de Banco de Horas (quando aplicável), dias de férias gozados e número de dias de subsídio de alimentação a que tem direito. O mapa pode ser gerado com ou sem segmentação por estrutura.",
   },
   {
     id: "empresa_externa",
@@ -68,11 +68,11 @@ const modules: Module[] = [
     demoImage: "https://i.imgur.com/OEP3gH0.png",
     demoVideo: "https://www.youtube.com/watch?v=iLlEDHfi7ZM",
     detailedDescription:
-      "Permite gerir e monitorizar a assiduidade de empresas externas, como empresas de trabalho temporário, possibilitando alocar colaboradores externos às empresas do grupo. Este relatório apresenta um mapa semelhante ao Mapa Resumo de Assiduidade, mas dedicado exclusivamente a estes colaboradores, garantindo controlo e análise detalhada do seu desempenho.",
+      "O sistema permite alocar colaboradores de empresas externas, como por exemplo empresas de trabalho temporário, à sua organização. Estas empresas e os seus colaboradores podem ser criados no sistema e associados à sua empresa para executar tarefas. Além de monitorizar a assiduidade, é gerado um relatório específico — semelhante ao Mapa Resumo de Assiduidade — que garante controlo e análise detalhada do desempenho,  pode ainda ser disponibilizado diretamente às próprias empresas externas, caso seja definido esse acesso.",
   },
   {
     id: "assiduidade",
-    title: "Mapa Resumo de Assiduidade",
+    title: "Mapa Resumos e Tempos de Trabalho (Excluindo  Horas Noturnas)",
     description: "Resumo de assiduidade sem horas noturnas.",
     price: "8€/mês",
     icon: CalendarCheck,
@@ -86,7 +86,7 @@ const modules: Module[] = [
     demoImage: "https://i.imgur.com/R3xwBSO.png",
     demoVideo: "https://www.youtube.com/watch?v=F1cdIkY20dw",
     detailedDescription:
-      "Relatório que apresenta um resumo da assiduidade por colaborador para o período selecionado, tal como o Mapa Resumo de Assiduidade, mas excluindo a informação relativa ao tempo de horas noturnas.",
+      "Relatório que apresenta um resumo da assiduidade por colaborador para o período selecionado, tal como o Mapa de registo de tempos de trabalho (excluindo horas noturnas), mas excluindo a informação relativa ao tempo de horas noturnas.",
   },
   {
     id: "Diarias",
@@ -146,7 +146,8 @@ const modules: Module[] = [
   },
   {
     id: "registo_tempo",
-    title: "Registo de Tempos de Trabalho",
+    title:
+      "Registo de tempo de Trabalho sem Contabilização de Horas Extras Autorizadas",
     description:
       "Registos de tempos de trabalho sem horas extra “a não considerar”.",
     price: "8€/mês",
@@ -161,7 +162,7 @@ const modules: Module[] = [
     demoImage: "https://i.imgur.com/Bh64ykm.png",
     demoVideo: "https://youtu.be/2d25bmxjZ7M",
     detailedDescription:
-      "Relatório que apresenta o registo dos tempos de trabalho dos colaboradores, semelhante ao Mapa de Registos de Tempos de Trabalho, mas excluindo as horas extra classificadas como “a não considerar” na contabilização.",
+      "Relatório que apresenta o registo dos tempos de trabalho dos colaboradores, semelhante ao Mapa de Registos de Tempos de Trabalho, mas excluindo as horas extra classificadas como “não considerar” na contabilização. Estas horas são assim marcadas por não terem sido previamente autorizadas pela entidade competente.",
   },
   {
     id: "registo_tempo_maps",
@@ -182,7 +183,7 @@ const modules: Module[] = [
   },
   {
     id: "picagens_vm",
-    title: "Mapa de Picagens por Dispositivo - VerifyMode",
+    title: "Mapa de Métodos de Picagem por Dispositivo",
     description: "Consulta de picagens por dispositivo com detalhe do método.",
     price: "8€/mês",
     icon: Fingerprint,
@@ -195,11 +196,12 @@ const modules: Module[] = [
     demoImage: "https://i.imgur.com/f97vPsV.png",
     demoVideo: "https://youtu.be/h_8jWnJjwO0",
     detailedDescription:
-      "Relatório que apresenta todas as picagens realizadas em cada dispositivo, indicando o método utilizado (VerifyMode). Permite remover o cabeçalho para exportação simplificada para Excel, obtendo uma lista corrida de dados pronta para análise.",
+      "Mapa que mostra, por dispositivo, os colaboradores que efetuaram picagens e o método utilizado. Permite ordenar pelas colunas disponíveis, como por exemplo o nome do colaborador, identificando de imediato em que dispositivo registou a picagem e qual o método utilizado. Os métodos possíveis incluem: impressão digital, reconhecimento facial, código PIN, WebApp, aplicação móvel, lançamento manual ou cartão.",
   },
   {
     id: "registo_tempo_trabalho_vm",
-    title: "Registo de Tempos de Trabalho - VerifyMode",
+    title:
+      "Mapa de Registos de Tempos de Trabalho com Indicação do Método de Picagem",
     description: "Registos de trabalho com detalhe do método usado na picagem.",
     price: "8€/mês",
     icon: ScanLine,
@@ -213,11 +215,12 @@ const modules: Module[] = [
     demoImage: "https://i.imgur.com/Bh64ykm.png",
     demoVideo: "https://youtu.be/2d25bmxjZ7M",
     detailedDescription:
-      "Registos de trabalho em lista, prontos para exportação e análise.",
+      "Mapa semelhante ao Mapa de Registos de Tempos de Trabalho, mas que acrescenta a indicação do método utilizado pelo colaborador em cada picagem (impressão digital, reconhecimento facial, código PIN, WebApp, aplicação móvel, lançamento manual ou cartão).",
   },
   {
     id: "listagem_registo_tempo_trabalho_vm",
-    title: "Listagem de Registo de Tempos de Trabalho - VerifyMode",
+    title:
+      "Listagem de Registos de Tempos de Trabalho com Indicação do Método de Picagem",
     description: "Registos de trabalho com detalhe do método usado na picagem.",
     price: "8€/mês",
     icon: List,
@@ -232,7 +235,7 @@ const modules: Module[] = [
 
     demoVideo: "https://youtu.be/txNJELklSuc",
     detailedDescription:
-      "Relatório similar ao Mapa de Registos de Tempos de Trabalho, apresentado em formato de listagem em vez de estar agrupado por colaborador. Permite remover o cabeçalho para exportação direta para Excel, facilitando o tratamento e análise de dados.",
+      "Relatório semelhante ao Mapa de Registos de Tempos de Trabalho, apresentado em formato de listagem em vez de agrupado por colaborador. Permite remover o cabeçalho para exportação direta em Excel, facilitando o tratamento e análise dos dados. Inclui ainda a indicação do método utilizado em cada picagem (impressão digital, reconhecimento facial, código PIN, WebApp, aplicação móvel, lançamento manual ou cartão).",
   },
   {
     id: "Geo",
@@ -244,13 +247,12 @@ const modules: Module[] = [
     features: [
       "Localização em tempo real",
       "Definição de zonas geográficas personalizadas",
-      "Execução de ações ao entrar ou sair de áreas definidas",
       "Registo e histórico de deslocações",
     ],
     demoImage: "https://i.imgur.com/zsTqEa7.jpeg",
     demoVideo: "https://youtu.be/e5N4s3dj0AM",
     detailedDescription:
-      "Permite monitorizar, a localização de colaboradores e ativos, definindo áreas geográficas específicas para controlo e automatização de processos. Esta funcionalidade possibilita a execução automática de ações sempre que um utilizador entra ou sai de uma zona pré-configurada, garantindo uma gestão mais eficiente das equipas no terreno.",
+      "Permite monitorizar a localização de colaboradores e ativos, definindo áreas geográficas específicas para controlo e automatização de processos. Com esta funcionalidade, é possível validar se os colaboradores cumpriram o percurso atribuído, garantindo uma gestão mais eficiente das equipas no terreno.",
     note: "O valor apresentado aplica-se apenas aos colaboradores que utilizam esta funcionalidade.",
   },
   {
@@ -262,10 +264,9 @@ const modules: Module[] = [
     icon: Workflow,
     category: "Módulos",
     features: [
-      "Ligação direta a sistemas ERP existentes",
-      "Sincronização automática de dados",
-      "Atualização em tempo real de informações",
-      "Automatização de tarefas administrativas e financeiras",
+      "Exportar informação adaptada aos sistemas ERP existentes",
+      "Exportar alterações nos dados",
+      "Facilitar tarefas administrativas e financeiras",
     ],
     demoImage: "https://i.imgur.com/cvHyef1.png",
     demoVideo: "https://youtu.be/uWzivIkfFzo",
