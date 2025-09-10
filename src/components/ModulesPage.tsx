@@ -71,62 +71,6 @@ const modules: Module[] = [
       "O sistema permite alocar colaboradores de empresas externas, como por exemplo empresas de trabalho temporário, à sua organização. Estas empresas e os seus colaboradores podem ser criados no sistema e associados à sua empresa para executar tarefas. Além de monitorizar a assiduidade, é gerado um relatório específico — semelhante ao Mapa Resumo de Assiduidade — que garante controlo e análise detalhada do desempenho,  pode ainda ser disponibilizado diretamente às próprias empresas externas, caso seja definido esse acesso.",
   },
   {
-    id: "assiduidade",
-    title: "Mapa Resumos e Tempos de Trabalho (Excluindo  Horas Noturnas)",
-    description: "Resumo de assiduidade sem horas noturnas.",
-    price: "8€/mês",
-    icon: CalendarCheck,
-    category: "Relatórios",
-    features: [
-      "Resumo de assiduidade por colaborador",
-      "Exclusão de horas noturnas",
-      "Visualização de horas previstas e efetivas",
-      "Identificação de faltas",
-    ],
-    demoImage: "https://i.imgur.com/R3xwBSO.png",
-    demoVideo: "https://www.youtube.com/watch?v=F1cdIkY20dw",
-    detailedDescription:
-      "Relatório que apresenta um resumo da assiduidade por colaborador para o período selecionado, tal como o Mapa de registo de tempos de trabalho (excluindo horas noturnas), mas excluindo a informação relativa ao tempo de horas noturnas.",
-  },
-  {
-    id: "Diarias",
-    title: "Marcações Diárias",
-    description:
-      "Visualize as marcações diárias sem contabilizar horas noturnas.",
-    price: "8€/mês",
-    icon: CalendarRange,
-    category: "Relatórios",
-    features: [
-      "Registo diário de marcações por colaborador",
-      "Visualização simplificada sem horas noturnas",
-      "Apresentação clara e objetiva",
-      "Exportação em formato de relatório",
-    ],
-    demoImage: "https://i.imgur.com/t9DG1j8.png",
-    demoVideo: "https://youtu.be/gZpa1DS6s3A",
-    detailedDescription:
-      "Relatório que apresenta as marcações diárias dos colaboradores, semelhante ao Mapa de Marcações Diárias tradicional, mas sem a indicação do tempo de horas noturnas.",
-  },
-  {
-    id: "tempo-trabalho",
-    title: "Registo de Tempos de Trabalho",
-    description:
-      "Consulte os registos de tempos de trabalho sem contabilizar horas noturnas.",
-    price: "8€/mês",
-    icon: Clock,
-    category: "Relatórios",
-    features: [
-      "Registo detalhado de tempos de trabalho por colaborador",
-      "Visualização simplificada sem horas noturnas",
-      "Apresentação clara e estruturada",
-      "Possibilidade de exportação do relatório",
-    ],
-    demoImage: "https://i.imgur.com/Bh64ykm.png",
-    demoVideo: "https://youtu.be/2d25bmxjZ7M",
-    detailedDescription:
-      "Relatório que apresenta o registo dos tempos de trabalho dos colaboradores, semelhante ao Mapa de Registos de Tempos de Trabalho tradicional, mas sem a indicação do tempo de horas noturnas.",
-  },
-  {
     id: "faltas",
     title: "Mapa de Faltas - Filtro",
     description: "Filtros avançados no Mapa de Faltas.",
