@@ -8,7 +8,7 @@ export const contentItems: ContentItem[] = [
     description: "Uma nova imagem, uma navegação mais simples",
     category: "Website",
     tags: ["UI/UX", "Visual Design", "Moderno"],
-    image: "https://i.imgur.com/9DzmdjM.jpeg",
+    image: "https://i.imgur.com/7nNaZpj.jpeg",
     content:
       "Apresentamos o novo site do 2Smart HR, com um design mais moderno, navegação intuitiva e acesso facilitado à informação. Este novo site foi pensado para melhorar a experiência dos nossos clientes e parceiros, reunindo num só local todas as funcionalidades, novidades e apoio ao utilizador.",
     features: [
@@ -43,12 +43,12 @@ export const contentItems: ContentItem[] = [
       { type: "heading", level: 2, text: "Geofencing na Gestão de Equipas" },
       {
         type: "text",
-        text: "A tecnologia de geofencing permite automatizar o controlo de presenças com base em zonas geográficas pré-definidas. O colaborador pode aceder á sua webapp e registar a sua entrada ou saída de forma segura. A esta mesma picagem é comunicada de forma automática ao sistema praticamente no mesmo instante de forma segura",
+        text: "A tecnologia de geofencing permite automatizar o controlo de presenças com base em zonas geográficas pré-definidas.O colaborador pode aceder à sua webapp e registar a sua entrada ou saída de forma segura. Esta mesma picagem é comunicada de forma automática e segura ao sistema",
       },
       { type: "heading", level: 3, text: "Como funciona o geofencing" },
       {
         type: "text",
-        text: "A tecnologia de geofencing permite automatizar o controlo de presenças com base em zonas geográficas pré-definidas. Sempre que um colaborador entra ou sai dessas zonas, o sistema reconhece a localização e regista o evento de forma automática e segura.",
+        text: "A tecnologia de geofencing permite automatizar o controlo de presenças com base em zonas geográficas pré-definidas. Sempre que um colaborador regista um movimento de entrada ou saída, o sistema reconhece a localização, permitindo tais movimentos apenas dentro da zona pré-definida.",
       },
       {
         type: "image",
@@ -88,7 +88,7 @@ export const contentItems: ContentItem[] = [
       "Visualização de dados em tempo real",
       "Criação de dashboard personalizado",
       "Filtragem e segmentação avançadas",
-      "Geração de relatórios de picagens geográficas",
+      "Geração de relatórios de picagens com zona geográfica",
     ],
   },
 
@@ -101,7 +101,7 @@ export const contentItems: ContentItem[] = [
     tags: ["Mobile", "Responsivo", "Performance"],
     image: "https://i.imgur.com/NN1FW1X.jpeg",
     content:
-      "O 2Smart HR chegou ao telemóvel! A nova 2Smart App, disponível para Android e iOS, permite aos colaboradores efectuar registos de presença, consultar horários, submeter pedidos e aceder a documentos — tudo de forma simples, prática e integrada com o sistema principal. Uma aplicação pensada para facilitar o dia a dia de quem está no terreno.",
+      "A nova 2Smart App, disponível para Android e iOS, permite aos colaboradores efetuar registos de presença, consultar horários, submeter pedidos e aceder a documentos — tudo de forma simples, prática e integrada com o sistema principal. Uma aplicação pensada para facilitar o dia a dia de quem está no terreno.",
     features: [
       "Performance móvel nativa",
       "Interfaces otimizadas para toque",
@@ -118,8 +118,8 @@ export const contentItems: ContentItem[] = [
     tags: ["Cloud", "Escalável", "Confiável"],
     image: "https://i.imgur.com/ifsHItW.jpeg",
     content: [
-      "Processamento Salarial Automatizado com a integração com o 2Smart HR.",
-      "Sabia que o 2Smart HR permite integrar as Assiduidades com o seu ERP para processamento salarial? O novo módulo de exportação para ERP permite integrar de forma programada as Assiduidades, Absenteísmo, Férias e outros para que o processamento salarial seja simplificado.  A aplicação permite a exportação da informação existente no 2smart, bastando para isso que nos digam quais os requisitos do vosso ERP. Fale com a nossa Equipa 2Smart HR para obter mais informações.",
+      "Processamento Salarial Otimizado com a integração com o 2Smart HR.",
+      "Sabia que o 2Smart HR permite integrar a Assiduidade com o seu ERP para processamento salarial? O novo módulo de exportação para ERP permite integrar de forma otimizada a Assiduidade, Absentismo, Férias e outros para que o processamento salarial seja simplificado.  A aplicação permite a exportação da informação existente no 2Smart HR, bastando para isso que no diga quais os requisitos do seu ERP. Fale com a nossa Equipa 2Smart HR para obter mais informações.",
     ],
     blocks: [
       {
@@ -134,12 +134,12 @@ export const contentItems: ContentItem[] = [
       },
       {
         type: "text",
-        text: "O 2Smart HR permite gerir todos os dados de Recursos Humanos e exportá-los diretamente para qualquer sistema ERP — desde assiduidade, horas extras, faltas e férias — garantindo informação precisa para a tomada de decisões estratégicas, com integração fácil no ERP que já utiliza.",
+        text: "O 2Smart HR permite gerir todos os dados de Recursos Humanos e exportá-los diretamente para qualquer sistema ERP — desde assiduidade, horas extra, faltas e férias — garantindo informação precisa para a tomada de decisões estratégicas, com integração fácil no ERP que já utiliza.",
       },
       { type: "heading", level: 3, text: "Principais Funcionalidades" },
       {
         type: "text",
-        text: "Exportação de assiduidade e horários para ERP, Envio da classificação das horas extras, faltas e férias, Atualização em tempo real de todos os indicadores, Redução de tarefas manuais e erros de lançamento, Compatibilidade com qualquer sistema de gestão/ERP.",
+        text: "Exportação de assiduidade para ERP, envio da classificação das horas extra, faltas e férias, atualização em tempo real de todos os indicadores, redução de tarefas manuais e erros de lançamento, compatibilidade com qualquer sistema de gestão/ERP.",
       },
       {
         type: "image",
@@ -153,7 +153,7 @@ export const contentItems: ContentItem[] = [
       },
       {
         type: "text",
-        text: "A plataforma permite exportar assiduidade, horas extras, faltas e férias diretamente para o seu ERP. Tudo num ambiente digital seguro e centralizado, evitando tarefas repetidas, já que as classificações registadas no 2Smart HR são automaticamente integradas no sistema.",
+        text: "A plataforma permite exportar assiduidade, horas extra, faltas e férias diretamente para o seu ERP. Tudo num ambiente digital seguro e centralizado, evitando tarefas repetidas, já que as classificações registadas no 2Smart HR são automaticamente integradas no sistema.",
       },
       {
         type: "image",
@@ -195,7 +195,7 @@ export const contentItems: ContentItem[] = [
   },
   {
     id: "5",
-    title: "Relatório Desenvolvido à sua Medida",
+    title: "Desenvolvimentos feitos à sua medida",
     subtitle: "Customização",
     description: "Soluções personalizadas para as suas necessidades",
     category: "Suporte",
@@ -288,8 +288,8 @@ export const contentItems: ContentItem[] = [
           "Alteração do Mapa de Banco de Horas para mostrar horas carregadas inicialmente - 20/06/2025",
           "Relatório Registo Tempos de Trabalho Maps (apresenta o local das picagens) - 24/04/2025",
           "Mapa de Banco de Horas - 18/02/2025",
-          "Mapa de Horas Extras - 18/02/2025",
-          "Mapa de Horários Semanal - 18/02/2025",
+          "Mapa de Horas Extra - 18/02/2025",
+          "Mapa de Horários Semanais - 18/02/2025",
           "Acréscimo de relatórios - 18/02/2025",
         ],
       },

@@ -91,17 +91,16 @@ export const ModuleModal: React.FC<ModuleModalProps> = ({
     const params = new URLSearchParams(window.location.search);
     const name = params.get("name") || "N/D";
     const nif = params.get("nif") || "N/D";
-    const clientId = params.get("id") || "N/D";
 
     const subject = `Solicitação de Acesso - ${module.title}`;
+    const tipoLabel = kind === "report" ? "relatório" : "módulo";
     const body = `Olá,
 
-Gostaria de solicitar acesso ao módulo "${module.title}" (${module.price}).
+Gostaria de solicitar acesso ao ${tipoLabel} "${module.title}" (${module.price}).
 
 Informações do Cliente:
 - Nome: ${name}
 - NIF: ${nif}
-- ID: ${clientId}
 
 Por favor, enviem-me mais informações sobre:
 - Processo de implementação
@@ -233,11 +232,11 @@ Cumprimentos,`;
           </button>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-7 p-6">
+        <div className="grid lg:grid-cols-2 gap-6 p-6">
           {/* Left Column - Demo (vídeo ou imagem) */}
           <div className="space-y-5">
             <div
-              className={`relative aspect-video rounded-xl overflow-hidden w-full max-w-[95%] ${
+              className={`relative aspect-video rounded-xl overflow-hidden w-full max-w-[90%] ${
                 isDark ? "bg-gray-800" : "bg-gray-200"
               }`}
             >
@@ -281,14 +280,16 @@ Cumprimentos,`;
             {/* Description */}
             <div>
               <h3
-                className={`text-lg font-semibold mb-3 ${
+                className={`text-lg font-semibold mb-2 ${
                   isDark ? "text-white" : "text-gray-900"
                 }`}
               >
-                Sobre este Módulo
+                {kind === "report"
+                  ? "Sobre este Relatório"
+                  : "Sobre este Módulo"}
               </h3>
               <p
-                className={`leading-snug mb-4 text-justify ${
+                className={`leading-snug mb-1 text-base text-justify ${
                   isDark ? "text-gray-400" : "text-gray-600"
                 }`}
               >

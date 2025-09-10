@@ -64,8 +64,8 @@ function AppContent() {
               isDark ? "text-gray-400" : "text-gray-600"
             }`}
           >
-            A Plataforma 2Smart HR cresce diariamente, acompanhe todas as
-            novidades e comunicações desenhadas especialmente para si!
+            A Plataforma 2Smart HR evolui continuamente. Acompanhe todas as
+            novidades e funcionalidades desenhadas especialmente para si!
           </p>
         </div>
 
