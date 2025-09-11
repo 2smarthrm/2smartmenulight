@@ -41,7 +41,7 @@ const modules: Module[] = [
     icon: BarChart3,
     category: "Relatórios",
     features: [
-      "Totais de horas previstas, trabalhadas e faltas",
+      "Totais de horas previstas, trabalhadas e de ausência",
       "Faltas classificadas e não classificadas",
       "Horas extra e Banco de Horas",
       "Dias de férias e subsídios",
@@ -90,8 +90,7 @@ const modules: Module[] = [
   },
   {
     id: "registo_tempo",
-    title:
-      "Registo de tempo de Trabalho sem Contabilização de Horas Extras Autorizadas",
+    title: "Registo de Trabalho sem Contar Horas Suplementares",
     description:
       "Registos de tempos de trabalho sem horas extra “a não considerar”.",
     price: "8€/mês",
@@ -144,8 +143,7 @@ const modules: Module[] = [
   },
   {
     id: "registo_tempo_trabalho_vm",
-    title:
-      "Mapa de Registos de Tempos de Trabalho com Indicação do Método de Picagem",
+    title: "Mapa de Registos de Trabalho por Picagem",
     description: "Registos de trabalho com detalhe do método usado na picagem.",
     price: "8€/mês",
     icon: ScanLine,
@@ -163,8 +161,7 @@ const modules: Module[] = [
   },
   {
     id: "listagem_registo_tempo_trabalho_vm",
-    title:
-      "Listagem de Registos de Tempos de Trabalho com Indicação do Método de Picagem",
+    title: "Registos de Tempos de Trabalho por Método de Picagem",
     description: "Registos de trabalho com detalhe do método usado na picagem.",
     price: "8€/mês",
     icon: List,
@@ -216,7 +213,6 @@ const modules: Module[] = [
     demoVideo: "https://youtu.be/uWzivIkfFzo",
     detailedDescription:
       "O Módulo de Integração com ERP conecta o 2Smart ao sistema ERP da sua organização, garantindo que dados relativos a colaboradores, horários, registos e relatórios são atualizados de forma automática e contínua. Esta integração elimina tarefas repetitivas, reduz erros humanos e assegura uma gestão mais ágil e precisa.",
-    note: "O valor apresentado aplica-se apenas aos colaboradores que utilizam esta funcionalidade.",
   },
 ];
 
