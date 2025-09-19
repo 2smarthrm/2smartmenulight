@@ -164,7 +164,8 @@ Cumprimentos,`;
 
       {/* Modal */}
       <div
-        className={`relative max-w-[90vw] max-h-[90vh] max-w-4xl rounded-2xl overflow-hidden border mt-10 mb-10 ${
+        className={`relative w-[1200px] max-w-[95vw] max-h-[calc(100vh-4rem)]
+              rounded-2xl overflow-hidden border mt-10 mb-10 flex flex-col ${
           isDark ? "bg-gray-900 border-gray-700" : "bg-white border-gray-300"
         }`}
         role="dialog"
@@ -173,10 +174,10 @@ Cumprimentos,`;
       >
         {/* Header */}
         <div
-          className={`flex items-center justify-between p-6 border-b ${
+          className={`sticky top-0 z-10 flex items-center justify-between p-6 border-b ${
             isDark
-              ? "border-gray-700 bg-gray-800/50"
-              : "border-gray-200 bg-gray-50/50"
+              ? "border-gray-700 bg-gray-800/70 backdrop-blur"
+              : "border-gray-200 bg-gray-50/70 backdrop-blur"
           }`}
         >
           <div className="flex items-center gap-4 flex-wrap">
@@ -231,12 +232,12 @@ Cumprimentos,`;
             <X size={24} />
           </button>
         </div>
-
+<div className="flex-1 overflow-y-auto p-6 [@media(max-height:800px)]:p-4">
         <div className="grid lg:grid-cols-2 gap-6 p-6">
           {/* Left Column - Demo (vídeo ou imagem) */}
           <div className="space-y-5">
             <div
-              className={`relative aspect-video rounded-xl overflow-hidden w-full max-w-[90%] ${
+              className={`relative aspect-video rounded-xl overflow-hidden w-full ${
                 isDark ? "bg-gray-800" : "bg-gray-200"
               }`}
             >
@@ -413,13 +414,13 @@ Cumprimentos,`;
             </div>
           </div>
         </div>
-
+</div>
         {/* Footer */}
         <div
-          className={`border-t p-6 ${
+          className={`sitcky bottom-0 z-10 border-t p-6 ${
             isDark
-              ? "border-gray-700 bg-gray-800/30"
-              : "border-gray-200 bg-gray-50/30"
+              ? "border-gray-700 bg-gray-800/60 backdrop-blur"
+              : "border-gray-200 bg-gray-50/60 backdrop-blur"
           }`}
         >
           <div className="flex items-center justify-between">
