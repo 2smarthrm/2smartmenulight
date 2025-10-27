@@ -112,7 +112,7 @@ Aguardo o vosso contacto.
 
 Cumprimentos,`;
 
-    const mailtoLink = `mailto:andreia.perdigao@2smart.pt?subject=${encodeURIComponent(
+    const mailtoLink = `mailto:paulo.ferreira@exportech.com.pt?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(body)}`;
 
@@ -166,8 +166,10 @@ Cumprimentos,`;
       <div
         className={`relative w-[1200px] max-w-[95vw] max-h-[calc(100vh-4rem)]
               rounded-2xl overflow-hidden border mt-10 mb-10 flex flex-col ${
-          isDark ? "bg-gray-900 border-gray-700" : "bg-white border-gray-300"
-        }`}
+                isDark
+                  ? "bg-gray-900 border-gray-700"
+                  : "bg-white border-gray-300"
+              }`}
         role="dialog"
         aria-modal="true"
         aria-label={`Detalhes do módulo ${module.title}`}
@@ -232,189 +234,189 @@ Cumprimentos,`;
             <X size={24} />
           </button>
         </div>
-<div className="flex-1 overflow-y-auto p-6 [@media(max-height:800px)]:p-4">
-        <div className="grid lg:grid-cols-2 gap-6 p-6">
-          {/* Left Column - Demo (vídeo ou imagem) */}
-          <div className="space-y-5">
-            <div
-              className={`relative aspect-video rounded-xl overflow-hidden w-full ${
-                isDark ? "bg-gray-800" : "bg-gray-200"
-              }`}
-            >
-              {iframeSrc ? (
-                <iframe
-                  className="w-full h-full"
-                  src={iframeSrc}
-                  title={module.title}
-                  allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
-                  allowFullScreen
-                />
-              ) : (
-                <>
-                  <img
-                    src={module.demoImage}
-                    alt={`${module.title} demo`}
-                    className="w-full h-full object-cover"
+        <div className="flex-1 overflow-y-auto p-6 [@media(max-height:800px)]:p-4">
+          <div className="grid lg:grid-cols-2 gap-6 p-6">
+            {/* Left Column - Demo (vídeo ou imagem) */}
+            <div className="space-y-5">
+              <div
+                className={`relative aspect-video rounded-xl overflow-hidden w-full ${
+                  isDark ? "bg-gray-800" : "bg-gray-200"
+                }`}
+              >
+                {iframeSrc ? (
+                  <iframe
+                    className="w-full h-full"
+                    src={iframeSrc}
+                    title={module.title}
+                    allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+                    allowFullScreen
                   />
-                  {module.demoVideo ? (
-                    <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-                      <button
-                        onClick={() => setIsVideoPlaying(true)}
-                        className="w-16 h-16 bg-blue-600/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-blue-500/90 transition-colors group"
-                        aria-label="Reproduzir vídeo"
-                      >
-                        <Play className="w-6 h-6 text-white ml-1" />
-                      </button>
+                ) : (
+                  <>
+                    <img
+                      src={module.demoImage}
+                      alt={`${module.title} demo`}
+                      className="w-full h-full object-cover"
+                    />
+                    {module.demoVideo ? (
+                      <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+                        <button
+                          onClick={() => setIsVideoPlaying(true)}
+                          className="w-16 h-16 bg-blue-600/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-blue-500/90 transition-colors group"
+                          aria-label="Reproduzir vídeo"
+                        >
+                          <Play className="w-6 h-6 text-white ml-1" />
+                        </button>
+                      </div>
+                    ) : null}
+                    <div className="absolute top-4 left-4">
+                      <span className="px-3 py-1 bg-black/60 backdrop-blur-sm text-white text-sm rounded-full">
+                        {module.demoVideo
+                          ? "Demo Interativa"
+                          : "Pré‑visualização"}
+                      </span>
                     </div>
-                  ) : null}
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 bg-black/60 backdrop-blur-sm text-white text-sm rounded-full">
-                      {module.demoVideo
-                        ? "Demo Interativa"
-                        : "Pré‑visualização"}
-                    </span>
-                  </div>
-                </>
-              )}
-            </div>
-
-            {/* Description */}
-            <div>
-              <h3
-                className={`text-lg font-semibold mb-2 ${
-                  isDark ? "text-white" : "text-gray-900"
-                }`}
-              >
-                {kind === "report"
-                  ? "Sobre este Relatório"
-                  : "Sobre este Módulo"}
-              </h3>
-              <p
-                className={`leading-snug mb-1 text-base text-justify ${
-                  isDark ? "text-gray-400" : "text-gray-600"
-                }`}
-              >
-                {module.detailedDescription}
-              </p>
-              <p
-                className={`leading-none ${
-                  isDark ? "text-gray-400" : "text-gray-600"
-                }`}
-              >
-                {module.description}
-              </p>
-            </div>
-          </div>
-
-          {/* Right Column - Features & Contact */}
-          <div className="space-y-5">
-            {/* Features */}
-            <div>
-              <h3
-                className={`text-lg font-semibold mb-4 ${
-                  isDark ? "text-white" : "text-gray-900"
-                }`}
-              >
-                Funcionalidades Principais
-              </h3>
-              <div className="space-y-3">
-                {module.features.map((feature, index) => (
-                  <div key={index} className="flex items-center gap-3">
-                    <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                    <span
-                      className={isDark ? "text-gray-300" : "text-gray-700"}
-                    >
-                      {feature}
-                    </span>
-                  </div>
-                ))}
+                  </>
+                )}
               </div>
-            </div>
 
-            {/* Pricing Info */}
-            <div
-              className={`rounded-xl p-6 border ${
-                isDark
-                  ? "bg-gray-800/50 border-gray-700"
-                  : "bg-gray-50/50 border-gray-200"
-              }`}
-            >
-              <h3
-                className={`text-lg font-semibold mb-2 ${
-                  isDark ? "text-white" : "text-gray-900"
-                }`}
-              >
-                {kind === "report"
-                  ? "Informações de Preço (Relatório)"
-                  : "Informações de Preço (Módulo)"}
-              </h3>
-
-              <div className="space-y-1">
-                {pricingRows.map((row, i) => (
-                  <div key={i} className="flex justify-between">
-                    <span
-                      className={isDark ? "text-gray-400" : "text-gray-600"}
-                    >
-                      {row.label}:
-                    </span>
-                    <span
-                      className={
-                        i === 0
-                          ? `font-semibold ${
-                              isDark ? "text-white" : "text-gray-900"
-                            }`
-                          : "text-blue-600"
-                      }
-                    >
-                      {row.value}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Contact Actions */}
-            <div className="space-y-4">
-              <button
-                onClick={handleRequestAccess}
-                className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors"
-              >
-                <Mail className="w-5 h-5" />
-                Quero ser contactado pela Equipa 2Smart HR
-              </button>
-
-              <button
-                onClick={() => window.open("tel:+351210353555")}
-                className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-xl transition-colors"
-              >
-                <Phone className="w-5 h-5" />
-                Ligar Agora: +351 210 353 555
-              </button>
-            </div>
-
-            {/* Additional Info */}
-            <div className="text-center">
-              <p
-                className={`text-sm ${
-                  isDark ? "text-gray-400" : "text-gray-600"
-                }`}
-              >
-                Resposta garantida em{" "}
-                <span
-                  className={`font-semibold ${
+              {/* Description */}
+              <div>
+                <h3
+                  className={`text-lg font-semibold mb-2 ${
                     isDark ? "text-white" : "text-gray-900"
                   }`}
                 >
-                  24 horas
-                </span>
-              </p>
-              <p className={`text-xs mt-1 text-gray-500`}>
-                Demonstração personalizada disponível
-              </p>
+                  {kind === "report"
+                    ? "Sobre este Relatório"
+                    : "Sobre este Módulo"}
+                </h3>
+                <p
+                  className={`leading-snug mb-1 text-base text-justify ${
+                    isDark ? "text-gray-400" : "text-gray-600"
+                  }`}
+                >
+                  {module.detailedDescription}
+                </p>
+                <p
+                  className={`leading-none ${
+                    isDark ? "text-gray-400" : "text-gray-600"
+                  }`}
+                >
+                  {module.description}
+                </p>
+              </div>
+            </div>
+
+            {/* Right Column - Features & Contact */}
+            <div className="space-y-5">
+              {/* Features */}
+              <div>
+                <h3
+                  className={`text-lg font-semibold mb-4 ${
+                    isDark ? "text-white" : "text-gray-900"
+                  }`}
+                >
+                  Funcionalidades Principais
+                </h3>
+                <div className="space-y-3">
+                  {module.features.map((feature, index) => (
+                    <div key={index} className="flex items-center gap-3">
+                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                      <span
+                        className={isDark ? "text-gray-300" : "text-gray-700"}
+                      >
+                        {feature}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Pricing Info */}
+              <div
+                className={`rounded-xl p-6 border ${
+                  isDark
+                    ? "bg-gray-800/50 border-gray-700"
+                    : "bg-gray-50/50 border-gray-200"
+                }`}
+              >
+                <h3
+                  className={`text-lg font-semibold mb-2 ${
+                    isDark ? "text-white" : "text-gray-900"
+                  }`}
+                >
+                  {kind === "report"
+                    ? "Informações de Preço (Relatório)"
+                    : "Informações de Preço (Módulo)"}
+                </h3>
+
+                <div className="space-y-1">
+                  {pricingRows.map((row, i) => (
+                    <div key={i} className="flex justify-between">
+                      <span
+                        className={isDark ? "text-gray-400" : "text-gray-600"}
+                      >
+                        {row.label}:
+                      </span>
+                      <span
+                        className={
+                          i === 0
+                            ? `font-semibold ${
+                                isDark ? "text-white" : "text-gray-900"
+                              }`
+                            : "text-blue-600"
+                        }
+                      >
+                        {row.value}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Contact Actions */}
+              <div className="space-y-4">
+                <button
+                  onClick={handleRequestAccess}
+                  className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors"
+                >
+                  <Mail className="w-5 h-5" />
+                  Quero ser contactado pela Equipa 2Smart HR
+                </button>
+
+                <button
+                  onClick={() => window.open("tel:+351210353555")}
+                  className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-xl transition-colors"
+                >
+                  <Phone className="w-5 h-5" />
+                  Ligar Agora: +351 210 353 555
+                </button>
+              </div>
+
+              {/* Additional Info */}
+              <div className="text-center">
+                <p
+                  className={`text-sm ${
+                    isDark ? "text-gray-400" : "text-gray-600"
+                  }`}
+                >
+                  Resposta garantida em{" "}
+                  <span
+                    className={`font-semibold ${
+                      isDark ? "text-white" : "text-gray-900"
+                    }`}
+                  >
+                    24 horas
+                  </span>
+                </p>
+                <p className={`text-xs mt-1 text-gray-500`}>
+                  Demonstração personalizada disponível
+                </p>
+              </div>
             </div>
           </div>
         </div>
-</div>
         {/* Footer */}
         <div
           className={`sitcky bottom-0 z-10 border-t p-6 ${
