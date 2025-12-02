@@ -1,10 +1,18 @@
-import React from "react";
-import { Play, Info, Bug, Phone, Mail, Globe } from "lucide-react";
+import React, { useState } from "react";
+import { Play, FileText, Bug, Phone, Mail, Globe } from "lucide-react";
 import { useTheme } from "../contexts/ThemeContext";
+import { ReportErrorModal } from "./ReportErrorModal";
+
+const REQUEST_FORM_URL =
+  "/assets/2Smart HR - Formulário de desenvolvimento.pdf";
 
 const supportOptions = [
   { id: "learn", title: "Aprender a usar o 2Smart HR", icon: Play },
-  { id: "info", title: "Centro de Informações 2Smart HR", icon: Info },
+  {
+    id: "info",
+    title: "Solicitar novo módulo/relatório 2Smart HR",
+    icon: FileText,
+  },
   { id: "report", title: "Reportar Erro 2Smart HR", icon: Bug },
 ];
 
@@ -39,6 +47,8 @@ interface SupportPageProps {
 export const SupportPage: React.FC<SupportPageProps> = ({ onLearnClick }) => {
   const { isDark } = useTheme();
 
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
+
   // tema a imitar a coluna da direita
   const t = isDark
     ? {
@@ -56,7 +66,7 @@ export const SupportPage: React.FC<SupportPageProps> = ({ onLearnClick }) => {
 
   const handleOptionClick = (optionId: string) => {
     if (optionId === "learn") onLearnClick();
-    // adicionar outras actions aqui se precisares
+    if (optionId === "report") setIsReportModalOpen(true);
   };
 
   return (
@@ -88,11 +98,37 @@ export const SupportPage: React.FC<SupportPageProps> = ({ onLearnClick }) => {
           <div className="space-y-6">
             {supportOptions.map((option) => {
               const IconComponent = option.icon;
+              const isDownloadOption = option.id === "info";
+
+              const baseClasses = `w-full flex items-center gap-6 p-6 rounded-xl border transition-all duration-200 text-left ${t.card}`;
+
+              if (isDownloadOption) {
+                // opção que faz download do PDF
+                return (
+                  <a
+                    key={option.id}
+                    href={REQUEST_FORM_URL}
+                    download
+                    className={baseClasses}
+                  >
+                    <div
+                      className={`w-12 h-12 rounded-lg flex items-center justify-center ${t.iconWrap}`}
+                    >
+                      <IconComponent className={`w-6 h-6 ${t.icon}`} />
+                    </div>
+                    <span className={`text-base font-medium ${t.text}`}>
+                      {option.title}
+                    </span>
+                  </a>
+                );
+              }
+
+              // restantes opções continuam como botão normal
               return (
                 <button
                   key={option.id}
                   onClick={() => handleOptionClick(option.id)}
-                  className={`w-full flex items-center gap-6 p-6 rounded-xl border transition-all duration-200 text-left ${t.card}`}
+                  className={baseClasses}
                 >
                   <div
                     className={`w-12 h-12 rounded-lg flex items-center justify-center ${t.iconWrap}`}
@@ -126,14 +162,46 @@ export const SupportPage: React.FC<SupportPageProps> = ({ onLearnClick }) => {
             <div className="space-y-8">
               {contactInfo.map((contact) => {
                 const IconComponent = contact.icon;
+
+                // definir o href certo consoante o tipo
+                let href: string | undefined;
+                let isExternal = false;
+
+                if (contact.id === "phone") {
+                  href = `tel:${contact.value.replace(/\s+/g, "")}`;
+                } else if (contact.id === "email") {
+                  href = `mailto:${contact.value}`;
+                } else if (contact.id === "website") {
+                  href = `https://${contact.value.replace(/^https?:\/\//, "")}`;
+                  isExternal = true;
+                }
+
+                const Wrapper: React.FC<{ children: React.ReactNode }> = ({
+                  children,
+                }) =>
+                  href ? (
+                    <a
+                      href={href}
+                      target={isExternal ? "_blank" : undefined}
+                      rel={isExternal ? "noopener noreferrer" : undefined}
+                      className="flex items-center gap-4 group"
+                    >
+                      {children}
+                    </a>
+                  ) : (
+                    <div className="flex items-center gap-4">{children}</div>
+                  );
+
                 return (
-                  <div key={contact.id} className="flex items-center gap-4">
+                  <Wrapper key={contact.id}>
                     <div
                       className={`w-10 h-10 rounded-lg flex items-center justify-center ${
                         isDark ? "bg-gray-800" : "bg-gray-200"
                       }`}
                     >
-                      <IconComponent className={`w-5 h-5 ${contact.color}`} />
+                      <IconComponent
+                        className={`w-5 h-5 ${contact.color} group-hover:opacity-80 transition-opacity`}
+                      />
                     </div>
                     <div>
                       <p
@@ -143,11 +211,15 @@ export const SupportPage: React.FC<SupportPageProps> = ({ onLearnClick }) => {
                       >
                         {contact.label}
                       </p>
-                      <p className={isDark ? "text-gray-300" : "text-gray-700"}>
+                      <p
+                        className={`${
+                          isDark ? "text-gray-300" : "text-gray-700"
+                        } group-hover:underline group-hover:decoration-blue-500/60 group-hover:underline-offset-2 transition`}
+                      >
                         {contact.value}
                       </p>
                     </div>
-                  </div>
+                  </Wrapper>
                 );
               })}
             </div>
@@ -169,6 +241,12 @@ export const SupportPage: React.FC<SupportPageProps> = ({ onLearnClick }) => {
           </div>
         </div>
       </div>
+
+      {/* Modal de Reportar Erro */}
+      <ReportErrorModal
+        isOpen={isReportModalOpen}
+        onClose={() => setIsReportModalOpen(false)}
+      />
     </div>
   );
 };

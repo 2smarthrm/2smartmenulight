@@ -292,14 +292,14 @@ Cumprimentos,`;
                     : "Sobre este Módulo"}
                 </h3>
                 <p
-                  className={`leading-snug mb-1 text-base text-justify ${
+                  className={`leading-snug mb-3 text-base text-justify ${
                     isDark ? "text-gray-400" : "text-gray-600"
                   }`}
                 >
                   {module.detailedDescription}
                 </p>
                 <p
-                  className={`leading-none ${
+                  className={`leading-none text-justify ${
                     isDark ? "text-gray-400" : "text-gray-600"
                   }`}
                 >

@@ -1,8 +1,69 @@
 import { ContentItem } from "../types";
 
 export const contentItems: ContentItem[] = [
-  {
+ {
     id: "1",
+    title: "Automatização de Processos e Envio de Relatórios",
+    subtitle: "Mobilidade",
+    description: "Envie automaticamente relatórios e notificações, aos seus colaboradores",
+    category: "Automatização",
+    tags: ["Relatórios", "Notificações", "processos Automáticos"],
+    image: "https://i.imgur.com/4rsE8Fh.png",
+    content:
+      "O módulo de Automatização de Processos e Envio de Relatórios permite programar o envio de qualquer relatório já disponível no 2Smart HR, garantindo que a informação chega às pessoas certas no momento definido. Além dos relatórios, também permite automatizar notificações e processos internos, eliminando tarefas repetitivas e reduzindo erros manuais.",
+    blocks: [
+      {
+        type: "image",
+        src: "https://i.imgur.com/MPe5qzv.png",
+        alt: "Envios configuráveis",
+      },
+      { type: "heading", level: 2, text: "Envio automatizado de relatórios" },
+      {
+        type: "text",
+        text: "Os Relatórios podem ser enviados para todos, para um grupo ou apenas um colaboradores. É possível configurar a periocidade dos mesmos (1dia, 1 semana, 1mês ( na realidade para u determinado numero de meses conforme a necessidade), a frequência com que o relatório deve ser enviado (diária, semanal, mensal ou várias vezes ao dia), e a hora de envio, sempre de acordo com as necessidades do cliente. Por exemplo é possível agendar para apenas para um determinado dia da semana numa determinada hora ou a ser enviado em horas diferentes num mesmo dia.",
+      },
+      { type: "heading", level: 3, text: "Processos automatizados e alertas configuráveis" },
+      {
+        type: "text",
+        text: "Para além do agendamento de relatórios, este módulo permite também automatizar processos específicos, garantindo que a informação chega às pessoas indicadas no momento programado.",
+      },
+      {
+        type: "image",
+        src: "https://i.imgur.com/5SZZWF7.png",
+        alt: "cliente",
+      },
+      {
+        type: "heading",
+        level: 3,
+        text: "Envio conforme as necessidades do cliente",
+      },
+      {
+        type: "text",
+        text: "Para além dos relatórios e das notificações  cujo seu envio é passível de ser desativado caso cliente assim entenda, existe ainda a possibilidade de nos serem solicitadas outro tipo de notificações para suprimir algum tipo de necessidade que o cliente possa ter. Para isso basta contactar-nos, para que seja fornecido o documento  a ser preenchido com a descrição da funcionalidade pretendida. Que nos deverá ser remetido para que possamos assim avaliar.",
+      },
+    ],
+    features: [
+  {
+    title: "Relatórios incluídos",
+    items: [
+      "Registo de tempos de trabalho",
+      "Marcações diárias",
+      "Mapa resumo de assiduidade",
+      "mapa de horários",
+      "Mapa de faltas",
+    ],
+  },
+],
+    cta: {
+      label: "Veja Mais",
+      href: "https://2smart.pt/automatic_reports.html",
+      variant: "primary",
+    },
+    
+    
+  },
+  {
+    id: "2",
     title: "Novo Site 2Smart HR",
     subtitle: "Re-Design",
     description: "Uma nova imagem, uma navegação mais simples",
@@ -25,7 +86,7 @@ export const contentItems: ContentItem[] = [
     },
   },
   {
-    id: "2",
+    id: "3",
     title: "Geolocalização & Geofencing",
     subtitle: "Localização",
     description: "Saiba onde estão as suas equipas, em tempo real",
@@ -81,7 +142,7 @@ export const contentItems: ContentItem[] = [
     ],
     cta: {
       label: "Veja Mais",
-      href: "https://www.2smart.pt/geofencing_and_geolocation",
+      href: "https://2smart.pt/geofencing_and_geolocation.html",
       variant: "primary",
     },
     features: [
@@ -93,7 +154,7 @@ export const contentItems: ContentItem[] = [
   },
 
   {
-    id: "3",
+    id: "4",
     title: "Lançamento 2Smart App",
     subtitle: "Mobile",
     description: "A gestão de recursos na palma da mão",
@@ -110,7 +171,7 @@ export const contentItems: ContentItem[] = [
     ],
   },
   {
-    id: "4",
+    id: "5",
     title: "Módulo de Exportação para ERP",
     subtitle: "Exportação",
     description: "Ligue a 2Smart HR ao seu sistema de gestão",
@@ -189,12 +250,12 @@ export const contentItems: ContentItem[] = [
     ],
     cta: {
       label: "Fale Connosco",
-      href: "https://www.2smart.pt/contactos",
+      href: "https://2smart.pt/ERP-solution.html",
       variant: "primary",
     },
   },
   {
-    id: "5",
+    id: "6",
     title: "Desenvolvimentos feitos à sua medida",
     subtitle: "Customização",
     description: "Soluções personalizadas para as suas necessidades",
@@ -245,7 +306,7 @@ export const contentItems: ContentItem[] = [
     ],
   },
   {
-    id: "6",
+    id: "7",
     title: "Melhorias e Novas Funcionalidades",
     subtitle: "Updates",
     description:
@@ -270,10 +331,19 @@ export const contentItems: ContentItem[] = [
       {
         title: "Planos de trabalho",
         items: [
+          "Posibilidade de definir tempo de tolerância na pausa principal - 09/09/2025",
+          "Posibildade de consultar a quem foi atribuído determinado plano por período de tempo. Para que esta funcionalidade apresente os resultados em pleno, os horários devem ser atribuídos através dos planos de trabalho - 28/07/2025", 
+          "Correção do bug na apresentação do relatório da atribuição. Embora o plano fosse corretamente atribuído, no relatório por vezes apresentava a mensagem de problema de execução - 12/05/2025",
           "Apresentação de relatório com resumo da atribuição e indicação de sucesso/insucesso - 06/04/2025",
           "Definição de tolerância para pausas intermédias quando previstas nos horários - 18/02/2025",
           "Criação de planos de trabalho com objetivo semanal - 18/02/2025",
           "Pesquisa e ordenação de planos de trabalho - 18/02/2025",
+        ],
+      },
+      {
+        title: "Mapa de Férias",
+        items: [
+          "Alteração da vista anual do Mapa de férias, porforma a ter maior visibilidade - 18/02/2025",
         ],
       },
       {
@@ -285,13 +355,21 @@ export const contentItems: ContentItem[] = [
       {
         title: "Relatórios",
         items: [
+          "Mapa de imparidades, incongruências - 07/11/2025",
+          "Mapa de imparidades, incongruências e faltas - 07/11/2025",
+          "Mapa de Horas Extras 100h/175h/200h - 05/11/2025",
+          "Mapa de Ausencias e atrasos - 05/11/2025",
+          "Mapa de horas Noturnas – 04/11/2025",
+          "Mapa de horas extra por tipo de classificação e por estrutura - 04/11/2025",
+          "Acréscimo de filtro por estrutura no relatório in-house - 17/09/2025",
+           "Alteração Mapa de Banco de Horas por forma a mostrar as horas carregadas inicialmente em Banco de Horas. - 27/06/2025",
           "Alteração do Mapa de Banco de Horas para mostrar horas carregadas inicialmente - 20/06/2025",
           "Relatório Registo Tempos de Trabalho Maps (apresenta o local das picagens) - 24/04/2025",
           "Mapa de Banco de Horas - 18/02/2025",
           "Mapa de Horas Extra - 18/02/2025",
           "Mapa de Horários Semanais - 18/02/2025",
           "Acréscimo de relatórios - 18/02/2025",
-        ],
+        ]
       },
       {
         title: "Classificações",
@@ -303,6 +381,9 @@ export const contentItems: ContentItem[] = [
       {
         title: "Dispositivos",
         items: [
+          "Possiibilade de excluir um determindo dispositivo, para que as picagens efetuadas no mesmo não sejam tidas em conta aquando do calculo das horas trabalhadas - 24/10/2025",
+          "Possibilidade de apagar log de picagens existentes nos dispositivos - 12/05/2025",
+          "Melhoria/correção no envio e obtenção de dados biométricos. Passou a ser possivel obter e enviar dados biométricos com FingerprintAlgorithm diferentes(o sistema faz essa gestão) - 06/04/2025",
           "Melhoria no processamento biométrico com gestão automática de diferentes FingerprintAlgorithm - 06/04/2025",
           "Agendamento de recolhas automáticas de movimentos por dispositivo (ou por gateway) - 18/02/2025",
           "Ajuste de hora do dispositivo via consulta de informação - 18/02/2025",
@@ -311,13 +392,18 @@ export const contentItems: ContentItem[] = [
       {
         title: "Configurações Empresa",
         items: [
+           "Posibilidade de definir tempo de tolerância na pausa principal- 14/10/2025",
+          "Possibilidade de definir pausas intermédias - O tempo total de pausas pode ser configurado entre a entrada e a saída para almoço, e entre o regresso do almoço e o fim do dia. Se o tempo total das pausas for excedido, o excedente é descontado ao horário. Se não for excedido, não há qualquer desconto. - 14/10/2025",
           "Definição de tolerância para pausas intermédias quando previstas nos horários - 18/02/2025",
           "Data de fecho mensal por empresa: limita submissões a até 1 mês antes do mês atual (perfis com Chefia/App); configuração reservada a RH/Administrador - 18/02/2025",
-        ],
+         ],
       },
       {
         title: "Outros",
         items: [
+          "Classificação de horas extras de forma automática para BH + comentários de pagamento no BH - 28/08/2025",
+          "Módulo – Automatização de Processos e Envio de Relatórios - 29/10/2025",
+          "Possibilidade de costumizar o tempo a pós o qual a sessão vai expirar  por tipo de perfil (colaborador/chefia/RH/administrador) - 21/11/2025",
           "Pesquisa rápida nas áreas relevantes e filtro por estrutura e subestruturas - 20/06/2025",
           "Alterações ao layout e disponibilização de tema claro - 20/06/2025",
           "Log de acessos à aplicação (quem fez login e quando) - 02/06/2025",
