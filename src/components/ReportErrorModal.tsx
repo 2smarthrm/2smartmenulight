@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { X } from "lucide-react";
+import { X, CheckCircle2, AlertCircle } from "lucide-react";
 import { useTheme } from "../contexts/ThemeContext";
 
 interface ReportErrorModalProps {
@@ -16,16 +16,69 @@ export const ReportErrorModal: React.FC<ReportErrorModalProps> = ({
   const [name, setName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const [feedback, setFeedback] = useState<{
+    type: "success" | "error";
+    text: string;
+  } | null>(null);
 
   if (!isOpen) return null;
 
-  const handleSubmit = () => {
-    const subject = encodeURIComponent("Reportar Erro 2Smart HR");
-    const body = encodeURIComponent(
-      `Nome: ${name}\nEmail: ${userEmail}\n\nDescrição do erro:\n${message}`
-    );
+  const handleSubmit = async () => {
+    if (!message.trim()) {
+      setFeedback({
+        type: "error",
+        text: "Por favor descreva o erro encontrado.",
+      });
+      return;
+    }
 
-    window.location.href = `mailto:pedro.goncalves@exportech.com.pt?subject=${subject}&body=${body}`;
+    setLoading(true);
+    setFeedback(null);
+
+    try {
+      const response = await fetch(
+        "https://mailtxt.vercel.app/report-2smart-error",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name,
+            email: userEmail,
+            description: message,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Erro no envio");
+      }
+
+      setFeedback({
+        type: "success",
+        text: "O seu relatório foi enviado com sucesso. Obrigado pelo contributo!",
+      });
+
+      setName("");
+      setUserEmail("");
+      setMessage("");
+
+      // Fecha o modal passado um pouco, se quiseres
+      setTimeout(() => {
+        onClose();
+        setFeedback(null);
+      }, 2000);
+    } catch (err) {
+      setFeedback({
+        type: "error",
+        text: "Ocorreu um erro ao enviar o relatório. Tente novamente dentro de alguns instantes.",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -54,8 +107,8 @@ export const ReportErrorModal: React.FC<ReportErrorModalProps> = ({
             isDark ? "text-gray-300" : "text-gray-600"
           }`}
         >
-          Descreva o problema que encontrou. A nossa equipa irá analisar a
-          situação e contactar caso seja necessário.
+          Descreva o problema encontrado. A nossa equipa irá analisar a
+          situação e, se necessário, entrará em contacto consigo.
         </p>
 
         <div className="space-y-4">
@@ -98,10 +151,35 @@ export const ReportErrorModal: React.FC<ReportErrorModalProps> = ({
 
         <button
           onClick={handleSubmit}
-          className="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition-colors"
+          disabled={loading}
+          className={`mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition-colors ${
+            loading ? "opacity-70 cursor-not-allowed" : ""
+          }`}
         >
-          Enviar para o Helpdesk
+          {loading ? "A enviar..." : "Enviar para o Helpdesk"}
         </button>
+
+        {/* Feedback tipo toast dentro do modal */}
+        {feedback && (
+          <div
+            className={`mt-4 flex items-start gap-2 rounded-lg px-3 py-2 text-sm ${
+              feedback.type === "success"
+                ? isDark
+                  ? "bg-green-900/40 text-green-300"
+                  : "bg-green-50 text-green-800"
+                : isDark
+                ? "bg-red-900/40 text-red-300"
+                : "bg-red-50 text-red-800"
+            }`}
+          >
+            {feedback.type === "success" ? (
+              <CheckCircle2 className="w-4 h-4 mt-[2px]" />
+            ) : (
+              <AlertCircle className="w-4 h-4 mt-[2px]" />
+            )}
+            <p>{feedback.text}</p>
+          </div>
+        )}
       </div>
     </div>
   );
