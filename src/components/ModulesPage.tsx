@@ -320,7 +320,7 @@ const modules: Module[] = [
     demoImage: "https://i.imgur.com/cvHyef1.png",
     demoVideo: "https://youtu.be/uWzivIkfFzo",
     detailedDescription:
-      "O Módulo de Integração com ERP conecta o 2Smart ao sistema ERP da sua organização, garantindo que dados relativos a colaboradores, horários, registos e relatórios são atualizados de forma automática e contínua. Esta integração elimina tarefas repetitivas, reduz erros humanos e assegura uma gestão mais ágil e precisa.",
+      "O Módulo de Integração com ERP conecta o 2Smart ao sistema ERP da sua organização, através da exportação de ficheiros, garantindo uma transferência simples e estruturada da informação necessária para o processamento no sistema do cliente. A aplicação disponibiliza a exportação de dados relativos a faltas, horas extra e férias, no formato mais adequado ao seu ERP — TXT, Excel ou CSV — para que possam ser posteriormente importados no sistema de gestão da empresa. Este módulo reduz o trabalho manual, diminui a probabilidade de erros e facilita a integração dos dados de assiduidade com os processos administrativos e de recursos humanos.",
   },
   {
     id: "autoRela",
